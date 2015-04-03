@@ -1,4 +1,29 @@
-﻿
+﻿//
+// This file is part of
+// FsAlg: Generic Linear Algebra Library
+//
+// Copyright (c) 2015, National University of Ireland Maynooth (Atilim Gunes Baydin, Barak A. Pearlmutter)
+//
+// FsAlg is released under the BSD license.
+// (See accompanying LICENSE file.)
+//
+// Written by:
+//
+//   Atilim Gunes Baydin
+//   atilimgunes.baydin@nuim.ie
+//
+//   Barak A. Pearlmutter
+//   barak@cs.nuim.ie
+//
+//   Brain and Computation Lab
+//   Hamilton Institute & Department of Computer Science
+//   National University of Ireland Maynooth
+//   Maynooth, Co. Kildare
+//   Ireland
+//
+//   www.bcl.hamilton.ie
+//
+
 namespace FsAlg.Generic
 
 open FsAlg.Generic.Util
