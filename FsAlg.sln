@@ -7,9 +7,11 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsAlg", "src\FsAlg\FsAlg.fs
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsAlg.Docs", "docs\tools\FsAlg.Docs\FsAlg.Docs.fsproj", "{B1879D2A-D348-41EC-A547-8C0116383709}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21FEAA04-EBA7-49C9-B0E6-0F244996DBAB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{21FEAA04-EBA7-49C9-B0E6-0F244996DBAB}"
 	ProjectSection(SolutionItems) = preProject
 		docs\input\index.fsx = docs\input\index.fsx
+		docs\input\matrix-operations.fsx = docs\input\matrix-operations.fsx
+		docs\input\vector-operations.fsx = docs\input\vector-operations.fsx
 	EndProjectSection
 EndProject
 Global

@@ -45,6 +45,8 @@ for fileInfo in DirectoryInfo(relative "input/files/img").EnumerateFiles() do
 let tags = ["project-name", "FsAlg"; "project-author", "Atılım Güneş Baydin"; "project-github", "http://github.com/gbaydin/FsAlg"; "project-nuget", "https://www.nuget.org/packages/fsalg"; "root", ""]
 
 Literate.ProcessScriptFile(relative "input/index.fsx", relative "input/templates/template.html", relative "output/index.html", replacements = tags, fsiEvaluator = FsiEvaluator())
+Literate.ProcessScriptFile(relative "input/vector-operations.fsx", relative "input/templates/template.html", relative "output/vector-operations.html", replacements = tags, fsiEvaluator = FsiEvaluator())
+Literate.ProcessScriptFile(relative "input/matrix-operations.fsx", relative "input/templates/template.html", relative "output/matrix-operations.html", replacements = tags, fsiEvaluator = FsiEvaluator())
 
 
 //
