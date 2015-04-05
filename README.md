@@ -2,6 +2,7 @@ FsAlg: Generic Linear Algebra Library
 =====================================
 
 Copyright (c) 2015, National University of Ireland Maynooth (Atilim Gunes Baydin, Barak A. Pearlmutter)
+
 All rights reserved.
 
 FsAlg is released under the BSD license. (See accompanying LICENSE file.)
