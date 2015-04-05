@@ -255,86 +255,86 @@ type Vector<'T when 'T : (static member Zero : 'T)
         | ZeroVector _ -> Vector.Zero
 
 
-/// Provides basic operations on Vector types. (Implementing functionality similar to Microsoft.FSharp.Collections.Array)
+/// Operations on Vector types. (Implementing functionality similar to Microsoft.FSharp.Collections.Array)
 [<RequireQualifiedAccess>]
 module Vector =
     /// Creates a Vector from sequence `s`
-    let inline ofSeq s = Vector (Array.ofSeq s)
+    let inline ofSeq (s:seq<'T>):Vector<'T> = Vector (Array.ofSeq s)
     /// Converts Vector `v` to an array
-    let inline toArray (v:Vector<_>) = v.ToArray()
+    let inline toArray (v:Vector<'T>):'T[] = v.ToArray()
     /// Returns Vector `v` as a sequence
-    let inline toSeq (v:Vector<_>) = v.ToSeq()
+    let inline toSeq (v:Vector<'T>):seq<'T> = v.ToSeq()
     /// Builds a new Vector that contains the elements of each of the given sequence of Vectors `v`
-    let inline concat (v:seq<Vector<_>>) = Seq.map toArray v |> Array.concat |> ofSeq
+    let inline concat (v:seq<Vector<'T>>):Vector<'T> = Seq.map toArray v |> Array.concat |> ofSeq
     /// Creates a copy of Vector `v`
-    let inline copy (v:Vector<_>) = v.Copy()
+    let inline copy (v:Vector<'T>):Vector<'T> = v.Copy()
     /// Creates a Vector with `n` elements, all having value `v`
-    let inline create n v = Vector (Array.create n v)
+    let inline create (n:int) (v:'T):Vector<'T> = Vector (Array.create n v)
     /// Creates a Vector with `n` elements, where the element with index `i` has value `v` and the rest of the elements have value 0
-    let inline createBasis n i v = Vector (Array.init n (fun j -> if j = i then v else LanguagePrimitives.GenericZero))
+    let inline createBasis (n:int) (i:int) (v:'T):Vector<'T> = Vector (Array.init n (fun j -> if j = i then v else LanguagePrimitives.GenericZero))
     /// Tests if any element of Vector `v` satisfies predicate `p`
-    let inline exists p (v:Vector<_>) = v |> toArray |> Array.exists p
+    let inline exists (p:'T->bool) (v:Vector<'T>):bool = v |> toArray |> Array.exists p
     /// Returns the first element of Vector `v` for which predicate `p` is true
-    let inline find p (v:Vector<_>) = v |> toArray |> Array.find p
+    let inline find (p:'T->bool) (v:Vector<'T>):'T = v |> toArray |> Array.find p
     /// Returns the index of the first element of Vector `v` for which predicate `p` is true
-    let inline findIndex p (v:Vector<_>) = v |> toArray |> Array.findIndex p
+    let inline findIndex (p:'T->bool) (v:Vector<'T>):int = v |> toArray |> Array.findIndex p
     /// Applies function `f` to each element of Vector `v`, threading an accumulator (with initial state `s`) through the computation. If the input function is f and the elements are i0...iN then computes f (... (f s i0)...) iN.
-    let inline fold f s (v:Vector<_>) = v |> toArray |> Array.fold f s
+    let inline fold (f:'S->'T->'S) (s:'S) (v:Vector<'T>):'S = v |> toArray |> Array.fold f s
     /// Applies function `f` to each element of Vector `v`, threading an accumulator (with initial state `s`) through the computation. If the input function is f and the elements are i0...iN then computes f i0 (...(f iN s)).
-    let inline foldBack f s (v:Vector<_>) = v |> toArray |> Array.foldBack f s
+    let inline foldBack (f:'T->'S->'S) (s:'S) (v:Vector<'T>):'S = Array.foldBack f (v |> toArray) s
     /// Tests if all elements of Vector `v` satisfy predicate `p`
-    let inline forall p (v:Vector<_>) = v |> toArray |> Array.forall p
+    let inline forall (p:'T->bool) (v:Vector<'T>):bool = v |> toArray |> Array.forall p
     /// Returns the value of the element with the given index `i`
-    let inline get i (v:Vector<_>) = v.[i]
+    let inline get (i:int) (v:Vector<'T>):'T = v.[i]
     /// Creates a Vector with dimension `n` and a generator function `f` to compute the elements
-    let inline init n f = Vector (Array.init n f)
+    let inline init (n:int) (f:int->'T):Vector<'T> = Vector (Array.init n f)
     /// Applies function `f` to each element of Vector `v`
-    let inline iter f (v:Vector<_>) = v |> toArray |> Array.iter f
+    let inline iter (f:'T->unit) (v:Vector<'T>):unit = v |> toArray |> Array.iter f
     /// Applies function `f` to each element of Vector `v`. The integer passed to function `f` indicates the index of element.
-    let inline iteri f (v:Vector<_>) = v |> toArray |> Array.iteri f
+    let inline iteri (f:int->'T->unit) (v:Vector<'T>):unit = v |> toArray |> Array.iteri f
     /// Gets the L1 (Manhattan) norm of Vector `v`
-    let inline l1norm (v:Vector<_>) = v.GetL1Norm()
+    let inline l1norm (v:Vector<'T>):'T = v.GetL1Norm()
     /// Gets the L2 (Euclidean) norm of Vector `v`. This is the same with `Vector.norm`.
-    let inline l2norm (v:Vector<_>) = v.GetL2Norm()
+    let inline l2norm (v:Vector<'T>):'T = v.GetL2Norm()
     /// Gets the squared L2 (Euclidean) norm of Vector `v`. This is the same with `Vector.normSq`.
-    let inline l2normSq (v:Vector<_>) = v.GetL2NormSq()
+    let inline l2normSq (v:Vector<'T>):'T = v.GetL2NormSq()
     /// Returns the length of Vector `v`
-    let inline length (v:Vector<_>) = v.Length
+    let inline length (v:Vector<'T>):int = v.Length
     /// Gets the Lp norm (or p-norm) of Vector `v`, with the given `p`
-    let inline lpnorm p (v:Vector<_>) = v.GetLPNorm(p)
+    let inline lpnorm (p:'T) (v:Vector<'T>):'T = v.GetLPNorm(p)
     /// Creates a Vector whose elements are the results of applying function `f` to each element of Vector `v`
-    let inline map f (v:Vector<_>) = v |> toArray |> Array.map f |> Vector
+    let inline map (f:'T->'U) (v:Vector<'T>):Vector<'U> = v |> toArray |> Array.map f |> Vector
     /// Creates a Vector whose elements are the results of applying function `f` to each element of Vector `v`. An element index is also supplied to function `f`.
-    let inline mapi f (v:Vector<_>) = v |> toArray |> Array.mapi f |> Vector
+    let inline mapi (f:int->'T->'U) (v:Vector<'T>):Vector<'U> = v |> toArray |> Array.mapi f |> Vector
     /// Returns the maximum of all elements of Vector `v`
-    let inline max (v:Vector<_>) = v.GetMax()
+    let inline max (v:Vector<'T>):'T = v.GetMax()
     /// Returns the maximum of all elements of Vector `v`, compared by using Operators.max on the result of function `f`
-    let inline maxBy f (v:Vector<_>) = v.GetMaxBy(f)
+    let inline maxBy (f:'T->'U) (v:Vector<'T>):'T = v.GetMaxBy(f)
     /// Returns the minimum of all elements of Vector `v`
-    let inline min (v:Vector<_>) = v.GetMin()
+    let inline min (v:Vector<'T>):'T = v.GetMin()
     /// Returns the minimum of all elements of Vector `v`, compared by using Operators.min on the result of function `f`
-    let inline minBy f (v:Vector<_>) = v.GetMinBy(f)
+    let inline minBy (f:'T->'U) (v:Vector<'T>):'T = v.GetMinBy(f)
     /// Gets the L2 (Euclidean) norm of Vector `v`. This is the same with `Vector.l2norm`.
-    let inline norm v = l2norm v
+    let inline norm (v:Vector<'T>):'T = l2norm v
     /// Gets the squared L2 (Euclidean) norm of Vector `v`. This is the same with `Vector.l2normSq`.
-    let inline normSq v = l2normSq v
+    let inline normSq (v:Vector<'T>):'T = l2normSq v
     /// Applies function `f` to each element of Vector `v`, threading an accumulator argument through the computation. If the input function is f and the elements are i0...iN, then computes f (... (f i0 i1)...) iN.
-    let inline reduce f (v:Vector<_>) = v |> toArray |> Array.reduce f
+    let inline reduce (f:'T->'T->'T) (v:Vector<'T>):'T = v |> toArray |> Array.reduce f
     /// Applies function `f` to each element of Vector `v`, threading an accumulator argument through the computation. If the input function is f and the elements are i0...iN then computes f i0 (...(f iN-1 iN)).
-    let inline reduceBack f (v:Vector<_>) = v |> toArray |> Array.reduceBack f
+    let inline reduceBack (f:'T->'T->'T) (v:Vector<'T>):'T = v |> toArray |> Array.reduceBack f
     /// Like Vector.fold, but returns the intermediate and final results
-    let inline scan f s (v:Vector<_>) = v |> toArray |> Array.scan f s
+    let inline scan (f:'S->'T->'S) (s:'S) (v:Vector<'T>):Vector<'S> = v |> toArray |> Array.scan f s |> ofSeq
     /// Like Vector.foldBack, but returns both the intermediate and final results
-    let inline scanBack f s (v:Vector<_>) = v |> toArray |> Array.scanBack f s
+    let inline scanBack (f:'T->'S->'S) (s:'S) (v:Vector<'T>):Vector<'S> = Array.scanBack f (v |> toArray) s |> ofSeq
     /// Returns a sequence of Vectors that are obtained by splitting Vector `v` into `n` subvectors of equal length. The length of Vector `v` must be an integer multiple of `n`, otherwise ArgumentException is raised.
-    let inline split n (v:Vector<_>) = v.Split(n)
+    let inline split (n:int) (v:Vector<'T>):seq<Vector<'T>> = v.Split(n)
     /// Creates a Vector with `n` elements, where the `i`-th element is 1 and the rest of the elements are 0
-    let inline standardBasis n i = createBasis n i LanguagePrimitives.GenericOne
+    let inline standardBasis (n:int) (i:int):Vector<'T> = createBasis n i LanguagePrimitives.GenericOne
     /// Creates a new Vector that contains the given subrange of Vector `v`, specified by start index `s` and count `c`
-    let inline sub (v:Vector<_>) s c = v.GetSubVector(s, c)
+    let inline sub (v:Vector<'T>) (s:int) (c:int):Vector<'T> = v.GetSubVector(s, c)
     /// Returns the sum of all the elements in Vector `v`
-    let inline sum (v:Vector<_>) = v |> toArray |> Array.sum
+    let inline sum (v:Vector<'T>):'T = v |> toArray |> Array.sum
     /// Returns the sum of the results generated by applying function `f` to each element of Vector `v`
-    let inline sumBy f (v:Vector<_>) = v |> toArray |> Array.sumBy f
+    let inline sumBy (f:'T->'U) (v:Vector<'T>):'U = v |> toArray |> Array.sumBy f
     /// Gets the unit vector codirectional with Vector `v`
-    let inline unitVector (v:Vector<_>) = v.GetUnitVector()
+    let inline unitVector (v:Vector<'T>) = v.GetUnitVector()

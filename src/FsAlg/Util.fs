@@ -24,6 +24,7 @@
 //   www.bcl.hamilton.ie
 //
 
+/// Various utility functions for internal use
 module FsAlg.Generic.Util
 
 /// Checks whether the 2d array `m` has the same number of elements in both dimensions

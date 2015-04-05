@@ -350,40 +350,42 @@ type Matrix<'T when 'T : (static member Zero : 'T)
             m' <- r * q
         m'.GetDiagonal()
 
-/// Provides basic operations on Matrix types. (Implementing functionality similar to Microsoft.FSharp.Collections.Array2D)
+/// Operations on Matrix types. (Implementing functionality similar to Microsoft.FSharp.Collections.Array2D)
 [<RequireQualifiedAccess>]
 module Matrix =
     /// Creates a Matrix from 2d array `m`
-    let inline ofArray2D (m:_[,]) = Matrix m
+    let inline ofArray2D (m:'T[,]):Matrix<'T> = Matrix m
     /// Creates a Matrix from sequence `s`
-    let inline ofSeq (s:seq<seq<_>>) = s |> Array.ofSeq |> Array.ofSeq |> array2D |> Matrix
+    let inline ofSeq (s:seq<seq<'T>>):Matrix<'T> = s |> Array.ofSeq |> Array.ofSeq |> array2D |> Matrix
     /// Converts Matrix `m` to a 2d array, e.g. from Matrix<float> to float[,]
-    let inline toArray2D (m:Matrix<_>) = m.ToArray2D()
+    let inline toArray2D (m:Matrix<'T>):'T[,] = m.ToArray2D()
     /// Converts Matrix `m` to a jagged array, e.g. from Matrix<float> to float[][]
-    let inline toArray (m:Matrix<_>) = m.ToArray()
+    let inline toArray (m:Matrix<'T>):'T[][] = m.ToArray()
     /// Returns the number of columns in Matrix `m`. This is the same with `Matrix.length2`.
-    let inline cols (m:Matrix<_>) = m.Cols
+    let inline cols (m:Matrix<'T>):int = m.Cols
     /// Creates a copy of Matrix `m`
-    let inline copy (m:Matrix<_>) = m.Copy()
+    let inline copy (m:Matrix<'T>):Matrix<'T> = m.Copy()
     /// Creates a Matrix with `m` rows, `n` columns, and all entries having value `v`
-    let inline create m n v = Matrix (Array2D.create m n v)
+    let inline create (m:int) (n:int) (v:'T):Matrix<'T> = Matrix (Array2D.create m n v)
     /// Creates a Matrix with `m` rows and all rows equal to array `v`
-    let inline createRows (m:int) (v:_[]) = Matrix (array2D (Array.init m (fun _ -> v)))
+    let inline createRows (m:int) (v:'T[]):Matrix<'T> = Matrix (array2D (Array.init m (fun _ -> v)))
     /// Gets the determinant of Matrix `m`
-    let inline det (m:Matrix<_>) = m.GetDeterminant()
+    let inline det (m:Matrix<'T>):'T = m.GetDeterminant()
+    /// Gets the diagonal elements of matrix `m`
+    let inline diagonal (m:Matrix<'T>):Vector<'T> = m.GetDiagonal() |> Vector.ofSeq
     /// Creates the identity matrix with `m` rows and columns
-    let inline identity m =
+    let inline identity (m:int):Matrix<'T> =
         Matrix (Array2D.init m m (fun i j -> if i = j then LanguagePrimitives.GenericOne<'T> else LanguagePrimitives.GenericZero<'T>))
     /// Gets the eigenvalues of Matrix `m`
-    let inline eigenvalues (m:Matrix<_>) = m.GetEigenvalues()
+    let inline eigenvalues (m:Matrix<'T>):Vector<'T> = m.GetEigenvalues() |> Vector.ofSeq
     /// Returns the value of the entry with the given indices `i` and `j`
-    let inline get i j (m:Matrix<_>) = m.[i, j]
+    let inline get (i:int) (j:int) (m:Matrix<'T>):'T = m.[i, j]
     /// Creates a Matrix with `m` rows, `n` columns and a generator function `f` to compute the entries
-    let inline init m n f = Matrix (Array2D.init m n f)
+    let inline init (m:int) (n:int) (f:int->int->'T):Matrix<'T> = Matrix (Array2D.init m n f)
     /// Creates a Matrix with `m` rows and a generator function `f` that gives each row as a an array
-    let inline initRows (m:int) (f:int->_[]) = Matrix (array2D (Array.init m f))
+    let inline initRows (m:int) (f:int->'T[]):Matrix<'T> = Matrix (array2D (Array.init m f))
     /// Creates a square Matrix with `m` rows and columns and a generator function `f` to compute the elements. Function `f` is used only for populating the diagonal and the upper triangular part of the Matrix, the lower triangular part will be the reflection.
-    let inline initSymmetric m f =
+    let inline initSymmetric (m:int) (f:int->int->'T):Matrix<'T> =
         if m = 0 then 
             Matrix.Zero
         else
@@ -393,24 +395,24 @@ module Matrix =
                     s.[i, j] <- f i j
             Matrix (copyUpperToLower s)
     /// Gets the inverse of Matrix `m`
-    let inline inverse (m:Matrix<_>) = m.GetInverse()
+    let inline inverse (m:Matrix<'T>):Matrix<'T> = m.GetInverse()
     /// Returns the number of rows in Matrix `m`. This is the same with `Matrix.rows`.
-    let inline length1 (m:Matrix<_>) = m.Rows
+    let inline length1 (m:Matrix<'T>):int = m.Rows
     /// Returns the number of columns in Matrix `m`. This is the same with `Matrix.cols`.
-    let inline length2 (m:Matrix<_>) = m.Cols
+    let inline length2 (m:Matrix<'T>):int = m.Cols
     /// Creates a Matrix whose entries are the results of applying function `f` to each entry of Matrix `m`
-    let inline map f (m:Matrix<_>) = m |> toArray2D |> Array2D.map f |> Matrix
+    let inline map (f:'T->'U) (m:Matrix<'T>):Matrix<'U> = m |> toArray2D |> Array2D.map f |> Matrix
     /// Creates a Matrix whose entries are the results of applying function `f` to each entry of Matrix `m`. An element index is also supplied to function `f`.
-    let inline mapi f (m:Matrix<_>) = m |> toArray2D |> Array2D.mapi f |> Matrix
+    let inline mapi (f:int->int->'T->'U) (m:Matrix<'T>):Matrix<'U> = m |> toArray2D |> Array2D.mapi f |> Matrix
     /// Returns the number of rows in Matrix `m`. This is the same with `Matrix.length1`.
-    let inline rows (m:Matrix<_>) = m.Rows
+    let inline rows (m:Matrix<'T>):int = m.Rows
     /// Solves a system of linear equations ax = b, where the coefficients are given in Matrix `a` and the result vector is Vector `b`. The returned vector will correspond to x.
-    let inline solve (a:Matrix<'T>) (b:Vector<'T>) =
+    let inline solve (a:Matrix<'T>) (b:Vector<'T>):Vector<'T> =
         if a.Cols <> b.Length then invalidArg "" "Cannot solve the system of equations using a matrix and a vector of incompatible sizes."
         let lu, perm, _ = a.GetLUDecomposition()
         let bp = Array.init a.Rows (fun i -> b.[perm.[i]])
         Vector (matrixSolveHelper (lu.ToArray2D()) bp)
     /// Gets the trace of Matrix `m`
-    let inline trace (m:Matrix<_>) = m.GetTrace()
+    let inline trace (m:Matrix<'T>):'T = m.GetTrace()
     /// Gets the transpose of Matrix `m`
-    let inline transpose (m:Matrix<_>) = m.GetTranspose()
+    let inline transpose (m:Matrix<'T>):Matrix<'T> = m.GetTranspose()
