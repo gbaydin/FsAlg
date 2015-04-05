@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Vector Operations
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FsAlg: Generic Linear Algebra Library">
+    <meta name="author" content="Atılım Güneş Baydin; Barak A. Pearlmutter">
+
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="misc/style.css" />
+    <script type="text/javascript" src="misc/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-48900508-4', 'auto');
+      ga('send', 'pageview');
+    </script>    
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/gbaydin/FsAlg">github page</a></li>
+        </ul>
+        <h3 class="muted">FsAlg</h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          <h1>Vector Operations</h1>
+
+<p>This page lists only a selection of commonly used vector operations provided by FsAlg.</p>
+
+<p>Please refer to <a href="reference/index.html">API Reference</a> for a full list of supported operations.</p>
+
+<p>The <strong>FsAlg.Generic.Vector</strong> module provides functionality similar to the F# <a href="https://msdn.microsoft.com/en-us/library/ee370273.aspx">Collecitons.Array</a> module, for creating and manipulating vectors.</p>
+
+<h2>Creating Vectors</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">FsAlg</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">Generic</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">v1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="f">vector</span> [<span class="n">1.</span>; <span class="n">2.</span>; <span class="n">3.</span>]
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">v2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="f">create</span> <span class="n">3</span> <span class="n">1.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="i">v3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="f">init</span> <span class="n">3</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="i">i</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="f">exp</span> (<span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="f">float</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="i">i</span>))
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val v1 : Vector&lt;float&gt; = Vector [|1.0; 2.0; 3.0|]
+val v2 : Vector&lt;float&gt; = Vector [|1.0; 1.0; 1.0|]
+val v3 : Vector&lt;float&gt; = Vector [|1.0; 2.718281828; 7.389056099|]</code></pre></td></tr></table>
+
+<h2>Basic Operations</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="i">v4</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 17)" onmouseover="showTip(event, 'fs3', 17)" class="i">v1</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs5', 18)" onmouseover="showTip(event, 'fs5', 18)" class="i">v2</span>  <span class="c">// Vector addition</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="i">v5</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 20)" onmouseover="showTip(event, 'fs3', 20)" class="i">v1</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs5', 21)" onmouseover="showTip(event, 'fs5', 21)" class="i">v2</span>  <span class="c">// Vector substraction</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="i">v6</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 23)" onmouseover="showTip(event, 'fs3', 23)" class="i">v1</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs5', 24)" onmouseover="showTip(event, 'fs5', 24)" class="i">v2</span>  <span class="c">// Vector inner product (dot / scalar product)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 25)" onmouseover="showTip(event, 'fs17', 25)" class="i">v7</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 26)" onmouseover="showTip(event, 'fs3', 26)" class="i">v1</span> <span class="o">%*</span> <span onmouseout="hideTip(event, 'fs5', 27)" onmouseover="showTip(event, 'fs5', 27)" class="i">v2</span> <span class="c">// Vector cross product</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="i">v8</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 29)" onmouseover="showTip(event, 'fs3', 29)" class="i">v1</span> <span class="o">.</span><span class="o">*</span> <span onmouseout="hideTip(event, 'fs5', 30)" onmouseover="showTip(event, 'fs5', 30)" class="i">v2</span> <span class="c">// Vector element-wise (Hadamard) product</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="i">v9</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 32)" onmouseover="showTip(event, 'fs3', 32)" class="i">v1</span> <span class="o">.</span><span class="o">/</span> <span onmouseout="hideTip(event, 'fs5', 33)" onmouseover="showTip(event, 'fs5', 33)" class="i">v2</span> <span class="c">// Vector element-wise (Hadamard) division</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="i">v10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 35)" onmouseover="showTip(event, 'fs3', 35)" class="i">v1</span> <span class="o">+</span> <span class="n">2.</span>  <span class="c">// Add scalar to vector</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 36)" onmouseover="showTip(event, 'fs21', 36)" class="i">v11</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 37)" onmouseover="showTip(event, 'fs3', 37)" class="i">v1</span> <span class="o">-</span> <span class="n">2.</span>  <span class="c">// Subtract scalar from vector</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 38)" onmouseover="showTip(event, 'fs22', 38)" class="i">v12</span> <span class="o">=</span> <span class="n">2.</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs3', 39)" onmouseover="showTip(event, 'fs3', 39)" class="i">v1</span>  <span class="c">// Subtract each element of vector from scalar</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="i">v13</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 41)" onmouseover="showTip(event, 'fs3', 41)" class="i">v1</span> <span class="o">*</span> <span class="n">2.</span>  <span class="c">// Vector-scalar multiplication</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 42)" onmouseover="showTip(event, 'fs24', 42)" class="i">v14</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 43)" onmouseover="showTip(event, 'fs3', 43)" class="i">v1</span> <span class="o">/</span> <span class="n">2.</span>  <span class="c">// Vector-scalar division</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="i">v15</span> <span class="o">=</span> <span class="n">2.</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs3', 45)" onmouseover="showTip(event, 'fs3', 45)" class="i">v1</span>  <span class="c">// Divides each element of vector by scalar</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 46)" onmouseover="showTip(event, 'fs26', 46)" class="i">v16</span> <span class="o">=</span> <span class="o">-</span><span onmouseout="hideTip(event, 'fs3', 47)" onmouseover="showTip(event, 'fs3', 47)" class="i">v1</span>      <span class="c">// Unary negation</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val v4 : Vector&lt;float&gt; = Vector [|2.0; 3.0; 4.0|]
+val v5 : Vector&lt;float&gt; = Vector [|0.0; 1.0; 2.0|]
+val v6 : float = 6.0
+val v7 : Vector&lt;float&gt; = Vector [|-1.0; 2.0; -1.0|]
+val v8 : Vector&lt;float&gt; = Vector [|1.0; 2.0; 3.0|]
+val v9 : Vector&lt;float&gt; = Vector [|1.0; 2.0; 3.0|]
+val v10 : Vector&lt;float&gt; = Vector [|3.0; 4.0; 5.0|]
+val v11 : Vector&lt;float&gt; = Vector [|-1.0; 0.0; 1.0|]
+val v12 : Vector&lt;float&gt; = Vector [|1.0; 0.0; -1.0|]
+val v13 : Vector&lt;float&gt; = Vector [|2.0; 4.0; 6.0|]
+val v14 : Vector&lt;float&gt; = Vector [|0.5; 1.0; 1.5|]
+val v15 : Vector&lt;float&gt; = Vector [|2.0; 1.0; 0.6666666667|]
+val v16 : Vector&lt;float&gt; = Vector [|-1.0; -2.0; -3.0|]</code></pre></td></tr></table>
+
+<h2>Vector Norms</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 49)" onmouseover="showTip(event, 'fs27', 49)" class="i">n1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 50)" onmouseover="showTip(event, 'fs6', 50)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 51)" onmouseover="showTip(event, 'fs28', 51)" class="f">l1norm</span> <span onmouseout="hideTip(event, 'fs3', 52)" onmouseover="showTip(event, 'fs3', 52)" class="i">v1</span>    <span class="c">// L1 norm</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 53)" onmouseover="showTip(event, 'fs29', 53)" class="i">n2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 54)" onmouseover="showTip(event, 'fs6', 54)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 55)" onmouseover="showTip(event, 'fs30', 55)" class="f">l2norm</span> <span onmouseout="hideTip(event, 'fs3', 56)" onmouseover="showTip(event, 'fs3', 56)" class="i">v1</span>    <span class="c">// L2 norm</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 57)" onmouseover="showTip(event, 'fs31', 57)" class="i">n3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 58)" onmouseover="showTip(event, 'fs6', 58)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 59)" onmouseover="showTip(event, 'fs32', 59)" class="f">l2normSq</span> <span onmouseout="hideTip(event, 'fs3', 60)" onmouseover="showTip(event, 'fs3', 60)" class="i">v1</span>  <span class="c">// Squared L2 norm</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 61)" onmouseover="showTip(event, 'fs33', 61)" class="i">n4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 62)" onmouseover="showTip(event, 'fs6', 62)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 63)" onmouseover="showTip(event, 'fs34', 63)" class="f">lpnorm</span> <span class="n">3.</span> <span onmouseout="hideTip(event, 'fs3', 64)" onmouseover="showTip(event, 'fs3', 64)" class="i">v1</span> <span class="c">// Lp norm</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val n1 : float = 6.0
+val n2 : float = 3.741657387
+val n3 : float = 14.0
+val n4 : float = 3.301927249</code></pre></td></tr></table>
+
+<h2>Accessing Elements</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 66)" onmouseover="showTip(event, 'fs35', 66)" class="i">e1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 67)" onmouseover="showTip(event, 'fs3', 67)" class="i">v1</span><span class="o">.</span>[<span class="n">0</span>]          <span class="c">// 1st element of v1</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 68)" onmouseover="showTip(event, 'fs36', 68)" class="i">e2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 69)" onmouseover="showTip(event, 'fs6', 69)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs37', 70)" onmouseover="showTip(event, 'fs37', 70)" class="f">get</span> <span class="n">1</span> <span onmouseout="hideTip(event, 'fs3', 71)" onmouseover="showTip(event, 'fs3', 71)" class="i">v1</span> <span class="c">// 2nd element of v1</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val e1 : float = 1.0
+val e2 : float = 2.0</code></pre></td></tr></table>
+
+<h2>Splitting and Concatenating</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 73)" onmouseover="showTip(event, 'fs38', 73)" class="i">ss</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 74)" onmouseover="showTip(event, 'fs6', 74)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs39', 75)" onmouseover="showTip(event, 'fs39', 75)" class="f">split</span> <span class="n">3</span> (<span onmouseout="hideTip(event, 'fs4', 76)" onmouseover="showTip(event, 'fs4', 76)" class="f">vector</span> [<span class="n">1.</span>; <span class="n">2.</span>; <span class="n">3.</span>; <span class="n">4.</span>; <span class="n">5.</span>; <span class="n">6.</span>]) <span class="c">// Split into 3 vectors of equal length</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 77)" onmouseover="showTip(event, 'fs40', 77)" class="i">cc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 78)" onmouseover="showTip(event, 'fs6', 78)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 79)" onmouseover="showTip(event, 'fs41', 79)" class="f">concat</span> <span onmouseout="hideTip(event, 'fs38', 80)" onmouseover="showTip(event, 'fs38', 80)" class="i">ss</span> <span class="c">// Concatenate vectors into one</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val ss : seq&lt;Vector&lt;float&gt;&gt;
+val cc : Vector&lt;float&gt; = Vector [|1.0; 2.0; 3.0; 4.0; 5.0; 6.0|]</code></pre></td></tr></table>
+
+<h2>Conversions</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 82)" onmouseover="showTip(event, 'fs42', 82)" class="i">v20</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 83)" onmouseover="showTip(event, 'fs6', 83)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs43', 84)" onmouseover="showTip(event, 'fs43', 84)" class="f">ofSeq</span> [<span class="n">1.</span>; <span class="n">2.</span>; <span class="n">3.</span>] <span class="c">// Convert sequence to vector</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 85)" onmouseover="showTip(event, 'fs44', 85)" class="i">v21</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 86)" onmouseover="showTip(event, 'fs4', 86)" class="f">vector</span> [<span class="n">1.</span>; <span class="n">2.</span>; <span class="n">3.</span>]       <span class="c">// Same with above, supports lists,</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs45', 87)" onmouseover="showTip(event, 'fs45', 87)" class="i">v22</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 88)" onmouseover="showTip(event, 'fs4', 88)" class="f">vector</span> [|<span class="n">1.</span>; <span class="n">2.</span>; <span class="n">3.</span>|]     <span class="c">// arrays,</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs46', 89)" onmouseover="showTip(event, 'fs46', 89)" class="i">v23</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 90)" onmouseover="showTip(event, 'fs4', 90)" class="f">vector</span> (<span onmouseout="hideTip(event, 'fs47', 91)" onmouseover="showTip(event, 'fs47', 91)" class="i">seq</span> {<span class="k">yield</span> <span class="n">1.</span>})   <span class="c">// and sequences.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 92)" onmouseover="showTip(event, 'fs48', 92)" class="i">aa1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 93)" onmouseover="showTip(event, 'fs6', 93)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 94)" onmouseover="showTip(event, 'fs49', 94)" class="f">toArray</span> <span onmouseout="hideTip(event, 'fs3', 95)" onmouseover="showTip(event, 'fs3', 95)" class="i">v1</span> <span class="c">// Convert vector to array</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 96)" onmouseover="showTip(event, 'fs50', 96)" class="i">sq1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 97)" onmouseover="showTip(event, 'fs6', 97)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs51', 98)" onmouseover="showTip(event, 'fs51', 98)" class="f">toSeq</span> <span onmouseout="hideTip(event, 'fs3', 99)" onmouseover="showTip(event, 'fs3', 99)" class="i">v1</span>   <span class="c">// Convert vector to sequence</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val v20 : Vector&lt;float&gt; = Vector [|1.0; 2.0; 3.0|]
+val v21 : Vector&lt;float&gt; = Vector [|1.0; 2.0; 3.0|]
+val v22 : Vector&lt;float&gt; = Vector [|1.0; 2.0; 3.0|]
+val v23 : Vector&lt;float&gt; = Vector [|1.0|]
+val aa1 : float [] = [|1.0; 2.0; 3.0|]
+val sq1 : seq&lt;float&gt;</code></pre></td></tr></table>
+
+<h2>Mathematica and MATLAB Strings</h2>
+
+<p>You can generate string representations of vectors that you can copy and paste into Mathematica notebooks or MATLAB.</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs52', 101)" onmouseover="showTip(event, 'fs52', 101)" class="i">s1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 102)" onmouseover="showTip(event, 'fs3', 102)" class="i">v1</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs53', 103)" onmouseover="showTip(event, 'fs53', 103)" class="f">ToMathematicaString</span>()
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 104)" onmouseover="showTip(event, 'fs54', 104)" class="i">s2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 105)" onmouseover="showTip(event, 'fs3', 105)" class="i">v1</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs55', 106)" onmouseover="showTip(event, 'fs55', 106)" class="f">ToMatlabString</span>()
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val s1 : string = "{1.00, 2.00, 3.00}"
+val s2 : string = "[1.00 2.00 3.00]"</code></pre></td></tr></table>
+
+<h2>Some Other Operations</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs56', 108)" onmouseover="showTip(event, 'fs56', 108)" class="i">len</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 109)" onmouseover="showTip(event, 'fs6', 109)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs57', 110)" onmouseover="showTip(event, 'fs57', 110)" class="f">length</span> <span onmouseout="hideTip(event, 'fs3', 111)" onmouseover="showTip(event, 'fs3', 111)" class="i">v1</span> <span class="c">// Length of vector</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 112)" onmouseover="showTip(event, 'fs58', 112)" class="i">min</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 113)" onmouseover="showTip(event, 'fs6', 113)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs59', 114)" onmouseover="showTip(event, 'fs59', 114)" class="f">min</span> <span onmouseout="hideTip(event, 'fs3', 115)" onmouseover="showTip(event, 'fs3', 115)" class="i">v1</span>  <span class="c">// Minimum element of vector</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 116)" onmouseover="showTip(event, 'fs60', 116)" class="i">max</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 117)" onmouseover="showTip(event, 'fs6', 117)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs61', 118)" onmouseover="showTip(event, 'fs61', 118)" class="f">max</span> <span onmouseout="hideTip(event, 'fs3', 119)" onmouseover="showTip(event, 'fs3', 119)" class="i">v1</span>  <span class="c">// Maximum element of vector</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 120)" onmouseover="showTip(event, 'fs62', 120)" class="i">sum</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 121)" onmouseover="showTip(event, 'fs6', 121)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs63', 122)" onmouseover="showTip(event, 'fs63', 122)" class="f">sum</span> <span onmouseout="hideTip(event, 'fs3', 123)" onmouseover="showTip(event, 'fs3', 123)" class="i">v1</span>  <span class="c">// Sum elements of vector</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 124)" onmouseover="showTip(event, 'fs64', 124)" class="i">v17</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 125)" onmouseover="showTip(event, 'fs6', 125)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs65', 126)" onmouseover="showTip(event, 'fs65', 126)" class="f">unitVector</span> <span onmouseout="hideTip(event, 'fs3', 127)" onmouseover="showTip(event, 'fs3', 127)" class="i">v1</span> <span class="c">// Get unit vector codirectional with v1</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs66', 128)" onmouseover="showTip(event, 'fs66', 128)" class="i">v18</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 129)" onmouseover="showTip(event, 'fs6', 129)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs67', 130)" onmouseover="showTip(event, 'fs67', 130)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs68', 131)" onmouseover="showTip(event, 'fs68', 131)" class="i">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs69', 132)" onmouseover="showTip(event, 'fs69', 132)" class="f">sin</span> <span onmouseout="hideTip(event, 'fs68', 133)" onmouseover="showTip(event, 'fs68', 133)" class="i">x</span>) <span onmouseout="hideTip(event, 'fs3', 134)" onmouseover="showTip(event, 'fs3', 134)" class="i">v1</span> <span class="c">// Map function to vector</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs70', 135)" onmouseover="showTip(event, 'fs70', 135)" class="i">v19</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 136)" onmouseover="showTip(event, 'fs6', 136)" class="t">Vector</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs71', 137)" onmouseover="showTip(event, 'fs71', 137)" class="f">fold</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs72', 138)" onmouseover="showTip(event, 'fs72', 138)" class="i">s</span> <span onmouseout="hideTip(event, 'fs68', 139)" onmouseover="showTip(event, 'fs68', 139)" class="i">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs72', 140)" onmouseover="showTip(event, 'fs72', 140)" class="i">s</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs69', 141)" onmouseover="showTip(event, 'fs69', 141)" class="f">sin</span> <span onmouseout="hideTip(event, 'fs68', 142)" onmouseover="showTip(event, 'fs68', 142)" class="i">x</span>) <span class="n">0.</span> <span onmouseout="hideTip(event, 'fs3', 143)" onmouseover="showTip(event, 'fs3', 143)" class="i">v1</span> <span class="c">// Fold a vector</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val len : int = 3
+val min : float = 1.0
+val max : float = 3.0
+val sum : float = 6.0
+val v17 : Vector&lt;float&gt; = Vector [|0.2672612419; 0.5345224838; 0.8017837257|]
+val v18 : Vector&lt;float&gt; = Vector [|0.8414709848; 0.9092974268; 0.1411200081|]
+val v19 : float = 1.89188842</code></pre></td></tr></table>
+
+          <div class="tip" id="fs1">namespace FsAlg</div>
+<div class="tip" id="fs2">namespace FsAlg.Generic</div>
+<div class="tip" id="fs3">val v1 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v1</div>
+<div class="tip" id="fs4">val vector : v:seq&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Ops.vector</div>
+<div class="tip" id="fs5">val v2 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v2</div>
+<div class="tip" id="fs6">Multiple items<br />union case Vector.Vector: &#39;T [] -&gt; Vector&lt;&#39;T&gt;<br /><br />--------------------<br />module Vector<br /><br />from FsAlg.Generic<br /><br />--------------------<br />type Vector&lt;&#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)&gt; =<br />&#160;&#160;| ZeroVector of &#39;T<br />&#160;&#160;| Vector of &#39;T []<br />&#160;&#160;member Convert : f:(&#39;T -&gt; &#39;a) -&gt; Vector&lt;&#39;a&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br />&#160;&#160;member Copy : unit -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;member GetL1Norm : unit -&gt; &#39;T<br />&#160;&#160;member GetL2Norm : unit -&gt; &#39;T<br />&#160;&#160;member GetL2NormSq : unit -&gt; &#39;T<br />&#160;&#160;member GetLPNorm : p:&#39;T -&gt; &#39;T<br />&#160;&#160;member GetMax : unit -&gt; &#39;T<br />&#160;&#160;member GetMaxBy : f:(&#39;T -&gt; &#39;a1) -&gt; &#39;T (requires comparison)<br />&#160;&#160;member GetMin : unit -&gt; &#39;T<br />&#160;&#160;member GetMinBy : f:(&#39;T -&gt; &#39;a1) -&gt; &#39;T (requires comparison)<br />&#160;&#160;member GetSubVector : s:int * c:int -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;member GetUnitVector : unit -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;member Split : n:int -&gt; seq&lt;Vector&lt;&#39;T&gt;&gt;<br />&#160;&#160;member ToArray : unit -&gt; &#39;T []<br />&#160;&#160;member ToMathematicaString : unit -&gt; string<br />&#160;&#160;member ToMatlabString : unit -&gt; string<br />&#160;&#160;member ToSeq : unit -&gt; seq&lt;&#39;T&gt;<br />&#160;&#160;member FirstItem : &#39;T<br />&#160;&#160;member Item : i:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;static member Zero : Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( + ) : a:&#39;T * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( + ) : a:Vector&lt;&#39;T&gt; * b:&#39;T -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( + ) : a:Vector&lt;&#39;T&gt; * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( / ) : a:&#39;T * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( / ) : a:Vector&lt;&#39;T&gt; * b:&#39;T -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( ./ ) : a:Vector&lt;&#39;T&gt; * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( .* ) : a:Vector&lt;&#39;T&gt; * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member op_Explicit : v:Vector&lt;&#39;T&gt; -&gt; float []<br />&#160;&#160;static member ( * ) : a:&#39;T * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( * ) : a:Vector&lt;&#39;T&gt; * b:&#39;T -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( * ) : a:Vector&lt;&#39;T&gt; * b:Vector&lt;&#39;T&gt; -&gt; &#39;T<br />&#160;&#160;static member ( %* ) : a:Vector&lt;&#39;T&gt; * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( - ) : a:&#39;T * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( - ) : a:Vector&lt;&#39;T&gt; * b:&#39;T -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( - ) : a:Vector&lt;&#39;T&gt; * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( ~- ) : a:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br /><br />Full name: FsAlg.Generic.Vector&lt;_&gt;</div>
+<div class="tip" id="fs7">val create : n:int -&gt; v:&#39;T -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.create</div>
+<div class="tip" id="fs8">val v3 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v3</div>
+<div class="tip" id="fs9">val init : n:int -&gt; f:(int -&gt; &#39;T) -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.init</div>
+<div class="tip" id="fs10">val i : int</div>
+<div class="tip" id="fs11">val exp : value:&#39;T -&gt; &#39;T (requires member Exp)<br /><br />Full name: Microsoft.FSharp.Core.Operators.exp</div>
+<div class="tip" id="fs12">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = System.Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
+<div class="tip" id="fs13">val printf : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printf</div>
+<div class="tip" id="fs14">val v4 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v4</div>
+<div class="tip" id="fs15">val v5 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v5</div>
+<div class="tip" id="fs16">val v6 : float<br /><br />Full name: Vector-operations.v6</div>
+<div class="tip" id="fs17">val v7 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v7</div>
+<div class="tip" id="fs18">val v8 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v8</div>
+<div class="tip" id="fs19">val v9 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v9</div>
+<div class="tip" id="fs20">val v10 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v10</div>
+<div class="tip" id="fs21">val v11 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v11</div>
+<div class="tip" id="fs22">val v12 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v12</div>
+<div class="tip" id="fs23">val v13 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v13</div>
+<div class="tip" id="fs24">val v14 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v14</div>
+<div class="tip" id="fs25">val v15 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v15</div>
+<div class="tip" id="fs26">val v16 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v16</div>
+<div class="tip" id="fs27">val n1 : float<br /><br />Full name: Vector-operations.n1</div>
+<div class="tip" id="fs28">val l1norm : v:Vector&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.l1norm</div>
+<div class="tip" id="fs29">val n2 : float<br /><br />Full name: Vector-operations.n2</div>
+<div class="tip" id="fs30">val l2norm : v:Vector&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.l2norm</div>
+<div class="tip" id="fs31">val n3 : float<br /><br />Full name: Vector-operations.n3</div>
+<div class="tip" id="fs32">val l2normSq : v:Vector&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.l2normSq</div>
+<div class="tip" id="fs33">val n4 : float<br /><br />Full name: Vector-operations.n4</div>
+<div class="tip" id="fs34">val lpnorm : p:&#39;T -&gt; v:Vector&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.lpnorm</div>
+<div class="tip" id="fs35">val e1 : float<br /><br />Full name: Vector-operations.e1</div>
+<div class="tip" id="fs36">val e2 : float<br /><br />Full name: Vector-operations.e2</div>
+<div class="tip" id="fs37">val get : i:int -&gt; v:Vector&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.get</div>
+<div class="tip" id="fs38">val ss : seq&lt;Vector&lt;float&gt;&gt;<br /><br />Full name: Vector-operations.ss</div>
+<div class="tip" id="fs39">val split : n:int -&gt; v:Vector&lt;&#39;T&gt; -&gt; seq&lt;Vector&lt;&#39;T&gt;&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.split</div>
+<div class="tip" id="fs40">val cc : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.cc</div>
+<div class="tip" id="fs41">val concat : v:seq&lt;Vector&lt;&#39;T&gt;&gt; -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.concat</div>
+<div class="tip" id="fs42">val v20 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v20</div>
+<div class="tip" id="fs43">val ofSeq : s:seq&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.ofSeq</div>
+<div class="tip" id="fs44">val v21 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v21</div>
+<div class="tip" id="fs45">val v22 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v22</div>
+<div class="tip" id="fs46">val v23 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v23</div>
+<div class="tip" id="fs47">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
+<div class="tip" id="fs48">val aa1 : float []<br /><br />Full name: Vector-operations.aa1</div>
+<div class="tip" id="fs49">val toArray : v:Vector&lt;&#39;T&gt; -&gt; &#39;T [] (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.toArray</div>
+<div class="tip" id="fs50">val sq1 : seq&lt;float&gt;<br /><br />Full name: Vector-operations.sq1</div>
+<div class="tip" id="fs51">val toSeq : v:Vector&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.toSeq</div>
+<div class="tip" id="fs52">val s1 : string<br /><br />Full name: Vector-operations.s1</div>
+<div class="tip" id="fs53">member Vector.ToMathematicaString : unit -&gt; string</div>
+<div class="tip" id="fs54">val s2 : string<br /><br />Full name: Vector-operations.s2</div>
+<div class="tip" id="fs55">member Vector.ToMatlabString : unit -&gt; string</div>
+<div class="tip" id="fs56">val len : int<br /><br />Full name: Vector-operations.len</div>
+<div class="tip" id="fs57">val length : v:Vector&lt;&#39;T&gt; -&gt; int (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.length</div>
+<div class="tip" id="fs58">val min : float<br /><br />Full name: Vector-operations.min</div>
+<div class="tip" id="fs59">val min : v:Vector&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.min</div>
+<div class="tip" id="fs60">val max : float<br /><br />Full name: Vector-operations.max</div>
+<div class="tip" id="fs61">val max : v:Vector&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.max</div>
+<div class="tip" id="fs62">val sum : float<br /><br />Full name: Vector-operations.sum</div>
+<div class="tip" id="fs63">val sum : v:Vector&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.sum</div>
+<div class="tip" id="fs64">val v17 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v17</div>
+<div class="tip" id="fs65">val unitVector : v:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.unitVector</div>
+<div class="tip" id="fs66">val v18 : Vector&lt;float&gt;<br /><br />Full name: Vector-operations.v18</div>
+<div class="tip" id="fs67">val map : f:(&#39;T -&gt; &#39;U) -&gt; v:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;U&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison and member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.map</div>
+<div class="tip" id="fs68">val x : float</div>
+<div class="tip" id="fs69">val sin : value:&#39;T -&gt; &#39;T (requires member Sin)<br /><br />Full name: Microsoft.FSharp.Core.Operators.sin</div>
+<div class="tip" id="fs70">val v19 : float<br /><br />Full name: Vector-operations.v19</div>
+<div class="tip" id="fs71">val fold : f:(&#39;S -&gt; &#39;T -&gt; &#39;S) -&gt; s:&#39;S -&gt; v:Vector&lt;&#39;T&gt; -&gt; &#39;S (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Vector.fold</div>
+<div class="tip" id="fs72">val s : float</div>
+          
+        </div>
+        <div class="span3">
+          <a href="index.html">
+            <img src="img/fsalg-logo.png" style="width:140px;height:140px;margin:10px 0px 0px 20px;border-style:none;" />
+          </a>        
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">FsAlg</li>
+            <li class="divider"></li>
+            <li><a href="index.html">Home page</a></li>
+            <li><a href="https://www.nuget.org/packages/fsalg">Get FsAlg via NuGet</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg">GitHub Page</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg/releases">Release Notes</a></li>
+
+            <li class="nav-header">Getting Started</li>
+            <li class="divider"></li>
+            <li><a href="vector-operations.html">Vector Operations</a></li>
+            <li><a href="matrix-operations.html">Matrix Operations</a></li>
+
+            <li class="nav-header">Reference</li>
+            <li class="divider"></li>
+            <li><a href="reference/index.html">API Reference</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Start of StatCounter Code for Default Guide -->
+    <script type="text/javascript">
+    var sc_project=10379501; 
+    var sc_invisible=1; 
+    var sc_security="8dc39a9b"; 
+    var scJsHost = (("https:" == document.location.protocol) ?
+    "https://secure." : "http://www.");
+    document.write("<sc"+"ript type='text/javascript' src='" +
+    scJsHost+
+    "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript><div class="statcounter"><a title="free hit
+    counter" href="http://statcounter.com/free-hit-counter/"
+    target="_blank"><img class="statcounter"
+    src="http://c.statcounter.com/10379501/0/8dc39a9b/1/"
+    alt="free hit counter"></a></div></noscript>
+    <!-- End of StatCounter Code for Default Guide -->    
+  </body>
+</html>

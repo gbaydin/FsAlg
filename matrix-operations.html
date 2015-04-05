@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Matrix Operations
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FsAlg: Generic Linear Algebra Library">
+    <meta name="author" content="Atılım Güneş Baydin; Barak A. Pearlmutter">
+
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="misc/style.css" />
+    <script type="text/javascript" src="misc/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-48900508-4', 'auto');
+      ga('send', 'pageview');
+    </script>    
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/gbaydin/FsAlg">github page</a></li>
+        </ul>
+        <h3 class="muted">FsAlg</h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          <h1>Matrix Operations</h1>
+
+<p>This page lists only a selection of commonly used matrix operations provided by FsAlg.</p>
+
+<p>Please refer to <a href="reference/index.html">API Reference</a> for a full list of supported operations.</p>
+
+<p>The <strong>FsAlg.Generic.Matrix</strong> module provides functionality similar to the F# <a href="https://msdn.microsoft.com/en-us/library/ee353794.aspx">Collecitons.Array2D</a> module, for creating and manipulating matrices.</p>
+
+<h2>Creating Matrices</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">FsAlg</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">Generic</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">m1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="f">matrix</span> [[<span class="n">1.</span>; <span class="n">2.</span>]; [<span class="n">3.</span>; <span class="n">4.</span>]]
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">m2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="f">create</span> <span class="n">2</span> <span class="n">2</span> <span class="n">1.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="i">m3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="f">init</span> <span class="n">2</span> <span class="n">2</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="i">i</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="i">j</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="f">exp</span> (<span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="f">float</span> (<span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="i">i</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="i">j</span>)))
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val m1 : Matrix&lt;float&gt; = Matrix [[1.0; 2.0]
+                                 [3.0; 4.0]]
+val m2 : Matrix&lt;float&gt; = Matrix [[1.0; 1.0]
+                                 [1.0; 1.0]]
+val m3 : Matrix&lt;float&gt; = Matrix [[1.0; 2.718281828]
+                                 [2.718281828; 7.389056099]]</code></pre></td></tr></table>
+
+<h2>Basic Operations</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="i">m4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 19)" onmouseover="showTip(event, 'fs3', 19)" class="i">m1</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs5', 20)" onmouseover="showTip(event, 'fs5', 20)" class="i">m2</span>  <span class="c">// Matrix addition</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="i">m5</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 22)" onmouseover="showTip(event, 'fs3', 22)" class="i">m1</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs5', 23)" onmouseover="showTip(event, 'fs5', 23)" class="i">m2</span>  <span class="c">// Matrix subtraction</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="i">m6</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 25)" onmouseover="showTip(event, 'fs3', 25)" class="i">m1</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs5', 26)" onmouseover="showTip(event, 'fs5', 26)" class="i">m2</span>  <span class="c">// Matrix product</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="i">m7</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 28)" onmouseover="showTip(event, 'fs3', 28)" class="i">m1</span> <span class="o">.</span><span class="o">*</span> <span onmouseout="hideTip(event, 'fs5', 29)" onmouseover="showTip(event, 'fs5', 29)" class="i">m2</span> <span class="c">// Matrix element-wise (Hadamard) product</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="i">m8</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 31)" onmouseover="showTip(event, 'fs3', 31)" class="i">m1</span> <span class="o">.</span><span class="o">/</span> <span onmouseout="hideTip(event, 'fs5', 32)" onmouseover="showTip(event, 'fs5', 32)" class="i">m2</span> <span class="c">// Matrix element-wise (Hadamard) division</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 33)" onmouseover="showTip(event, 'fs20', 33)" class="i">v</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs21', 34)" onmouseover="showTip(event, 'fs21', 34)" class="f">vector</span> [<span class="n">1.</span>; <span class="n">2.</span>]
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 35)" onmouseover="showTip(event, 'fs22', 35)" class="i">m9</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 36)" onmouseover="showTip(event, 'fs3', 36)" class="i">m1</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="i">v</span>   <span class="c">// Matrix-vector product</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="i">m10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 39)" onmouseover="showTip(event, 'fs20', 39)" class="i">v</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs3', 40)" onmouseover="showTip(event, 'fs3', 40)" class="i">m1</span>  <span class="c">// Vector-matrix product</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="i">m11</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 42)" onmouseover="showTip(event, 'fs3', 42)" class="i">m1</span> <span class="o">+</span> <span class="n">2.</span> <span class="c">// Add scalar to matrix</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="i">m12</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 44)" onmouseover="showTip(event, 'fs3', 44)" class="i">m1</span> <span class="o">-</span> <span class="n">2.</span> <span class="c">// Subtract scalar from matrix</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 45)" onmouseover="showTip(event, 'fs26', 45)" class="i">m13</span> <span class="o">=</span> <span class="n">2.</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs3', 46)" onmouseover="showTip(event, 'fs3', 46)" class="i">m1</span> <span class="c">// Subtract each element of matrix from scalar</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 47)" onmouseover="showTip(event, 'fs27', 47)" class="i">m14</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 48)" onmouseover="showTip(event, 'fs3', 48)" class="i">m1</span> <span class="o">*</span> <span class="n">2.</span> <span class="c">// Matrix-scalar multiplication</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 49)" onmouseover="showTip(event, 'fs28', 49)" class="i">m15</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 50)" onmouseover="showTip(event, 'fs3', 50)" class="i">m1</span> <span class="o">/</span> <span class="n">2.</span> <span class="c">// Matrix-scalar division</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 51)" onmouseover="showTip(event, 'fs29', 51)" class="i">m16</span> <span class="o">=</span> <span class="n">2.</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs3', 52)" onmouseover="showTip(event, 'fs3', 52)" class="i">m1</span> <span class="c">// Divides each element of matrix by scalar</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 53)" onmouseover="showTip(event, 'fs30', 53)" class="i">m17</span> <span class="o">=</span> <span class="o">-</span><span onmouseout="hideTip(event, 'fs3', 54)" onmouseover="showTip(event, 'fs3', 54)" class="i">m1</span>     <span class="c">// Unary negation</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val m4 : Matrix&lt;float&gt; = Matrix [[2.0; 3.0]
+                                 [4.0; 5.0]]
+val m5 : Matrix&lt;float&gt; = Matrix [[0.0; 1.0]
+                                 [2.0; 3.0]]
+val m6 : Matrix&lt;float&gt; = Matrix [[3.0; 3.0]
+                                 [7.0; 7.0]]
+val m7 : Matrix&lt;float&gt; = Matrix [[1.0; 2.0]
+                                 [3.0; 4.0]]
+val m8 : Matrix&lt;float&gt; = Matrix [[1.0; 2.0]
+                                 [3.0; 4.0]]
+val v : Vector&lt;float&gt; = Vector [|1.0; 2.0|]
+val m9 : Vector&lt;float&gt; = Vector [|5.0; 11.0|]
+val m10 : Vector&lt;float&gt; = Vector [|7.0; 10.0|]
+val m11 : Matrix&lt;float&gt; = Matrix [[3.0; 4.0]
+                                  [5.0; 6.0]]
+val m12 : Matrix&lt;float&gt; = Matrix [[-1.0; 0.0]
+                                  [1.0; 2.0]]
+val m13 : Matrix&lt;float&gt; = Matrix [[1.0; 0.0]
+                                  [-1.0; -2.0]]
+val m14 : Matrix&lt;float&gt; = Matrix [[2.0; 4.0]
+                                  [6.0; 8.0]]
+val m15 : Matrix&lt;float&gt; = Matrix [[0.5; 1.0]
+                                  [1.5; 2.0]]
+val m16 : Matrix&lt;float&gt; = Matrix [[2.0; 1.0]
+                                  [0.6666666667; 0.5]]
+val m17 : Matrix&lt;float&gt; = Matrix [[-1.0; -2.0]
+                                  [-3.0; -4.0]]</code></pre></td></tr></table>
+
+<h2>Matrix Operations</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 56)" onmouseover="showTip(event, 'fs31', 56)" class="i">m1det</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 57)" onmouseover="showTip(event, 'fs6', 57)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs32', 58)" onmouseover="showTip(event, 'fs32', 58)" class="f">det</span> <span onmouseout="hideTip(event, 'fs3', 59)" onmouseover="showTip(event, 'fs3', 59)" class="i">m1</span>         <span class="c">// Determinant</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 60)" onmouseover="showTip(event, 'fs33', 60)" class="i">m1inv</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 61)" onmouseover="showTip(event, 'fs6', 61)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs34', 62)" onmouseover="showTip(event, 'fs34', 62)" class="f">inverse</span> <span onmouseout="hideTip(event, 'fs3', 63)" onmouseover="showTip(event, 'fs3', 63)" class="i">m1</span>     <span class="c">// Inverse</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 64)" onmouseover="showTip(event, 'fs35', 64)" class="i">m1eig</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 65)" onmouseover="showTip(event, 'fs6', 65)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs36', 66)" onmouseover="showTip(event, 'fs36', 66)" class="f">eigenvalues</span> <span onmouseout="hideTip(event, 'fs3', 67)" onmouseover="showTip(event, 'fs3', 67)" class="i">m1</span> <span class="c">// Eigenvalues</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 68)" onmouseover="showTip(event, 'fs37', 68)" class="i">m1t</span>   <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 69)" onmouseover="showTip(event, 'fs6', 69)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs38', 70)" onmouseover="showTip(event, 'fs38', 70)" class="f">transpose</span> <span onmouseout="hideTip(event, 'fs3', 71)" onmouseover="showTip(event, 'fs3', 71)" class="i">m1</span>   <span class="c">// Transpose</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 72)" onmouseover="showTip(event, 'fs39', 72)" class="i">m1tr</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 73)" onmouseover="showTip(event, 'fs6', 73)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 74)" onmouseover="showTip(event, 'fs40', 74)" class="f">trace</span> <span onmouseout="hideTip(event, 'fs3', 75)" onmouseover="showTip(event, 'fs3', 75)" class="i">m1</span>       <span class="c">// Trace</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 76)" onmouseover="showTip(event, 'fs41', 76)" class="i">m1dia</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 77)" onmouseover="showTip(event, 'fs6', 77)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs42', 78)" onmouseover="showTip(event, 'fs42', 78)" class="f">diagonal</span> <span onmouseout="hideTip(event, 'fs3', 79)" onmouseover="showTip(event, 'fs3', 79)" class="i">m1</span>    <span class="c">// Diagonal</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val m1det : float = -2.0
+val m1inv : Matrix&lt;float&gt; = Matrix [[-2.0; 1.0]
+                                    [1.5; -0.5]]
+val m1eig : Vector&lt;float&gt; = Vector [|5.372281312; -0.3722813117|]
+val m1t : Matrix&lt;float&gt; = Matrix [[1.0; 3.0]
+                                  [2.0; 4.0]]
+val m1tr : float = 5.0
+val m1dia : Vector&lt;float&gt; = Vector [|1.0; 4.0|]</code></pre></td></tr></table>
+
+<h2>Solving Systems of Linear Equations</h2>
+
+<p>We can solve a <a href="http://en.wikipedia.org/wiki/System_of_linear_equations">system of linear equations</a> represented in matrix form <span class="math">\(\mathbf{A} \mathbf{x} = \mathbf{b} \;,\)</span> which has solution <span class="math">\(\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}\;\)</span>.</p>
+
+<p>For example, the system</p>
+
+<p><span class="math">\[  \begin{eqnarray*}
+  3x + 2y - z &amp;=&amp; 1\\
+  2x - 2y +4z &amp;=&amp; -2\\
+  -x + 0.5y -z &amp;=&amp; 0\\
+  \end{eqnarray*}\]</span></p>
+
+<p>can be represented as</p>
+
+<p><span class="math">\[    \begin{bmatrix}
+    3 &amp; 2 &amp; -1\\
+    2 &amp; -2 &amp; 4\\
+    -1&amp; 0.5 &amp;-1\\
+    \end{bmatrix} \begin{bmatrix}
+    x\\
+    y\\
+    z\\
+    \end{bmatrix} = \begin{bmatrix}
+    1\\
+    -2\\
+    0\\
+    \end{bmatrix}\]</span></p>
+
+<p>and has solution</p>
+
+<p><span class="math">\[  \begin{eqnarray*}
+  x &amp;=&amp; 1\\
+  y &amp;=&amp; -2\\
+  z &amp;=&amp; -2\\
+  \end{eqnarray*}\; .\]</span></p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 81)" onmouseover="showTip(event, 'fs43', 81)" class="i">A</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 82)" onmouseover="showTip(event, 'fs4', 82)" class="f">matrix</span> [[<span class="n">3.</span>; <span class="n">2.</span>; <span class="o">-</span><span class="n">1.</span>]; [<span class="n">2.</span>; <span class="o">-</span><span class="n">2.</span>; <span class="n">4.</span>]; [<span class="o">-</span><span class="n">1.</span>; <span class="n">0.5</span>; <span class="o">-</span><span class="n">1.</span>]]
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 83)" onmouseover="showTip(event, 'fs44', 83)" class="i">b</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs21', 84)" onmouseover="showTip(event, 'fs21', 84)" class="f">vector</span> [<span class="n">1.</span>; <span class="o">-</span><span class="n">2.</span>; <span class="n">0.</span>]
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs45', 85)" onmouseover="showTip(event, 'fs45', 85)" class="i">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 86)" onmouseover="showTip(event, 'fs6', 86)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 87)" onmouseover="showTip(event, 'fs46', 87)" class="f">solve</span> <span onmouseout="hideTip(event, 'fs43', 88)" onmouseover="showTip(event, 'fs43', 88)" class="i">A</span> <span onmouseout="hideTip(event, 'fs44', 89)" onmouseover="showTip(event, 'fs44', 89)" class="i">b</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val A : Matrix&lt;float&gt; = Matrix [[3.0; 2.0; -1.0]
+                                [2.0; -2.0; 4.0]
+                                [-1.0; 0.5; -1.0]]
+val b : Vector&lt;float&gt; = Vector [|1.0; -2.0; 0.0|]
+val x : Vector&lt;float&gt; = Vector [|1.0; -2.0; -2.0|]</code></pre></td></tr></table>
+
+<h2>Matrix Decompositions</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs47', 91)" onmouseover="showTip(event, 'fs47', 91)" class="i">lu</span>, <span onmouseout="hideTip(event, 'fs48', 92)" onmouseover="showTip(event, 'fs48', 92)" class="i">piv</span>, <span onmouseout="hideTip(event, 'fs49', 93)" onmouseover="showTip(event, 'fs49', 93)" class="i">togg</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 94)" onmouseover="showTip(event, 'fs6', 94)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs50', 95)" onmouseover="showTip(event, 'fs50', 95)" class="f">decomposeLU</span> <span onmouseout="hideTip(event, 'fs3', 96)" onmouseover="showTip(event, 'fs3', 96)" class="i">m1</span> <span class="c">// LU decomposition</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs51', 97)" onmouseover="showTip(event, 'fs51', 97)" class="i">q</span>, <span onmouseout="hideTip(event, 'fs52', 98)" onmouseover="showTip(event, 'fs52', 98)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 99)" onmouseover="showTip(event, 'fs6', 99)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs53', 100)" onmouseover="showTip(event, 'fs53', 100)" class="f">decomposeQR</span> <span onmouseout="hideTip(event, 'fs3', 101)" onmouseover="showTip(event, 'fs3', 101)" class="i">m1</span> <span class="c">// QR decomposition</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val togg : float = -1.0
+val piv : int [] = [|1; 0|]
+val lu : Matrix&lt;float&gt; = Matrix [[3.0; 4.0]
+                                 [0.3333333333; 0.6666666667]]
+val r : Matrix&lt;float&gt; = Matrix [[3.16227766; 4.427188724]
+                                [4.440892099e-16; 0.632455532]]
+val q : Matrix&lt;float&gt; = Matrix [[0.316227766; 0.9486832981]
+                                [0.9486832981; -0.316227766]]</code></pre></td></tr></table>
+
+<h2>Accessing Elements</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 103)" onmouseover="showTip(event, 'fs54', 103)" class="i">el1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 104)" onmouseover="showTip(event, 'fs3', 104)" class="i">m1</span><span class="o">.</span>[<span class="n">0</span>, <span class="n">0</span>]         <span class="c">// Element at 0, 0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 105)" onmouseover="showTip(event, 'fs55', 105)" class="i">el2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 106)" onmouseover="showTip(event, 'fs6', 106)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs56', 107)" onmouseover="showTip(event, 'fs56', 107)" class="f">get</span> <span class="n">1</span> <span class="n">1</span> <span onmouseout="hideTip(event, 'fs3', 108)" onmouseover="showTip(event, 'fs3', 108)" class="i">m1</span> <span class="c">// Element at 1, 1</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs57', 109)" onmouseover="showTip(event, 'fs57', 109)" class="i">sl1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 110)" onmouseover="showTip(event, 'fs3', 110)" class="i">m1</span><span class="o">.</span>[<span class="n">0..</span><span class="n">1</span>, <span class="n">1..</span>]    <span class="c">// Slice, between rows 0 and 1, columns 1 and beyond</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 111)" onmouseover="showTip(event, 'fs58', 111)" class="i">sl2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 112)" onmouseover="showTip(event, 'fs3', 112)" class="i">m1</span><span class="o">.</span>[<span class="o">*</span>, <span class="n">0..</span><span class="n">1</span>]      <span class="c">// Slice, all rows, between columns 0 and 1</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val el1 : float = 1.0
+val el2 : float = 4.0
+val sl1 : Matrix&lt;float&gt; = Matrix [[2.0]
+                                  [4.0]]
+val sl2 : Matrix&lt;float&gt; = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]</code></pre></td></tr></table>
+
+<h2>Conversions</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs59', 114)" onmouseover="showTip(event, 'fs59', 114)" class="i">m18</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 115)" onmouseover="showTip(event, 'fs6', 115)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs60', 116)" onmouseover="showTip(event, 'fs60', 116)" class="f">ofSeq</span> [[<span class="n">1.</span>; <span class="n">2.</span>]; [<span class="n">3.</span>; <span class="n">4.</span>]]  <span class="c">// Convert sequence of sequences to matrix</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs61', 117)" onmouseover="showTip(event, 'fs61', 117)" class="i">m19</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 118)" onmouseover="showTip(event, 'fs4', 118)" class="f">matrix</span> [[<span class="n">1.</span>; <span class="n">2.</span>]; [<span class="n">3.</span>; <span class="n">4.</span>]]        <span class="c">// Same with above, supprots lists,</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 119)" onmouseover="showTip(event, 'fs62', 119)" class="i">m20</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 120)" onmouseover="showTip(event, 'fs4', 120)" class="f">matrix</span> [|[|<span class="n">1.</span>; <span class="n">2.</span>|]; [|<span class="n">3.</span>; <span class="n">4.</span>|]|]  <span class="c">// arrays,</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 121)" onmouseover="showTip(event, 'fs63', 121)" class="i">m21</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 122)" onmouseover="showTip(event, 'fs4', 122)" class="f">matrix</span> (<span onmouseout="hideTip(event, 'fs64', 123)" onmouseover="showTip(event, 'fs64', 123)" class="i">seq</span> {<span class="k">yield</span> <span onmouseout="hideTip(event, 'fs64', 124)" onmouseover="showTip(event, 'fs64', 124)" class="i">seq</span> {<span class="k">yield</span> <span class="n">1.</span>}}) <span class="c">// and sequences.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs65', 125)" onmouseover="showTip(event, 'fs65', 125)" class="i">aa1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 126)" onmouseover="showTip(event, 'fs6', 126)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs66', 127)" onmouseover="showTip(event, 'fs66', 127)" class="f">toArray</span> <span onmouseout="hideTip(event, 'fs3', 128)" onmouseover="showTip(event, 'fs3', 128)" class="i">m1</span>   <span class="c">// Convert matrix to jagged array</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs67', 129)" onmouseover="showTip(event, 'fs67', 129)" class="i">aa2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 130)" onmouseover="showTip(event, 'fs6', 130)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs68', 131)" onmouseover="showTip(event, 'fs68', 131)" class="f">toArray2D</span> <span onmouseout="hideTip(event, 'fs3', 132)" onmouseover="showTip(event, 'fs3', 132)" class="i">m1</span> <span class="c">// Convert matrix to 2d array</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val m18 : Matrix&lt;float&gt; = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val m19 : Matrix&lt;float&gt; = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val m20 : Matrix&lt;float&gt; = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val m21 : Matrix&lt;float&gt; = Matrix [[1.0]]
+val aa1 : float [] [] = [|[|1.0; 2.0|]; [|3.0; 4.0|]|]
+val aa2 : float [,] = [[1.0; 2.0]
+                       [3.0; 4.0]]</code></pre></td></tr></table>
+
+<h2>Mathematica and MATLAB Strings</h2>
+
+<p>You can generate string representations of matrices that you can copy and paste into Mathematica notebooks or MATLAB.</p>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs69', 134)" onmouseover="showTip(event, 'fs69', 134)" class="i">s1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 135)" onmouseover="showTip(event, 'fs3', 135)" class="i">m1</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs70', 136)" onmouseover="showTip(event, 'fs70', 136)" class="f">ToMathematicaString</span>()
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs71', 137)" onmouseover="showTip(event, 'fs71', 137)" class="i">s2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 138)" onmouseover="showTip(event, 'fs5', 138)" class="i">m2</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs72', 139)" onmouseover="showTip(event, 'fs72', 139)" class="f">ToMatlabString</span>()
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val s1 : string = "{{1.00, 2.00}, {3.00, 4.00}}"
+val s2 : string = "[1.00 1.00; 1.00 1.00]"</code></pre></td></tr></table>
+
+<h2>Some Other Operations</h2>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs73', 141)" onmouseover="showTip(event, 'fs73', 141)" class="i">l1</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 142)" onmouseover="showTip(event, 'fs6', 142)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs74', 143)" onmouseover="showTip(event, 'fs74', 143)" class="f">rows</span> <span onmouseout="hideTip(event, 'fs3', 144)" onmouseover="showTip(event, 'fs3', 144)" class="i">m1</span> <span class="c">// Number of rows</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs75', 145)" onmouseover="showTip(event, 'fs75', 145)" class="i">l2</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 146)" onmouseover="showTip(event, 'fs6', 146)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs76', 147)" onmouseover="showTip(event, 'fs76', 147)" class="f">cols</span> <span onmouseout="hideTip(event, 'fs3', 148)" onmouseover="showTip(event, 'fs3', 148)" class="i">m1</span> <span class="c">// Number of columns</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs77', 149)" onmouseover="showTip(event, 'fs77', 149)" class="i">m22</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 150)" onmouseover="showTip(event, 'fs6', 150)" class="t">Matrix</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs78', 151)" onmouseover="showTip(event, 'fs78', 151)" class="f">map</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs79', 152)" onmouseover="showTip(event, 'fs79', 152)" class="i">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs80', 153)" onmouseover="showTip(event, 'fs80', 153)" class="f">sin</span> <span onmouseout="hideTip(event, 'fs79', 154)" onmouseover="showTip(event, 'fs79', 154)" class="i">x</span>) <span onmouseout="hideTip(event, 'fs3', 155)" onmouseover="showTip(event, 'fs3', 155)" class="i">m1</span> <span class="c">// Map function to matrix</span>
+</pre>
+</td>
+</tr>
+</table>
+
+<table class="pre"><tr><td><pre><code>val l1 : int = 2
+val l2 : int = 2
+val m22 : Matrix&lt;float&gt; = Matrix [[0.8414709848; 0.9092974268]
+                                  [0.1411200081; -0.7568024953]]</code></pre></td></tr></table>
+
+          <div class="tip" id="fs1">namespace FsAlg</div>
+<div class="tip" id="fs2">namespace FsAlg.Generic</div>
+<div class="tip" id="fs3">val m1 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m1</div>
+<div class="tip" id="fs4">val matrix : m:seq&lt;seq&lt;&#39;T&gt;&gt; -&gt; Matrix&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Ops.matrix</div>
+<div class="tip" id="fs5">val m2 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m2</div>
+<div class="tip" id="fs6">Multiple items<br />union case Matrix.Matrix: &#39;T [,] -&gt; Matrix&lt;&#39;T&gt;<br /><br />--------------------<br />module Matrix<br /><br />from FsAlg.Generic<br /><br />--------------------<br />type Matrix&lt;&#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)&gt; =<br />&#160;&#160;| ZeroMatrix of &#39;T<br />&#160;&#160;| Matrix of &#39;T [,]<br />&#160;&#160;member Copy : unit -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;member GetDeterminant : unit -&gt; &#39;T<br />&#160;&#160;member GetDiagonal : unit -&gt; &#39;T []<br />&#160;&#160;member GetEigenvalues : unit -&gt; &#39;T []<br />&#160;&#160;member GetInverse : unit -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;member GetLUDecomposition : unit -&gt; Matrix&lt;&#39;T&gt; * int [] * &#39;T<br />&#160;&#160;member GetQRDecomposition : unit -&gt; Matrix&lt;&#39;T&gt; * Matrix&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : rowStart:int option * rowFinish:int option * col:int -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : row:int * colStart:int option * colFinish:int option -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : rowStart:int option * rowFinish:int option * colStart:int option * colFinish:int option -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;member GetTrace : unit -&gt; &#39;T<br />&#160;&#160;member GetTranspose : unit -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;member ToArray : unit -&gt; &#39;T [] []<br />&#160;&#160;member ToArray2D : unit -&gt; &#39;T [,]<br />&#160;&#160;member ToMathematicaString : unit -&gt; string<br />&#160;&#160;member ToMatlabString : unit -&gt; string<br />&#160;&#160;member Cols : int<br />&#160;&#160;member Item : i:int * j:int -&gt; &#39;T with get<br />&#160;&#160;member Rows : int<br />&#160;&#160;static member Zero : Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( + ) : a:&#39;T * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( + ) : a:Matrix&lt;&#39;T&gt; * b:&#39;T -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( + ) : a:Matrix&lt;&#39;T&gt; * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( / ) : a:&#39;T * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( / ) : a:Matrix&lt;&#39;T&gt; * b:&#39;T -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( ./ ) : a:Matrix&lt;&#39;T&gt; * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( .* ) : a:Matrix&lt;&#39;T&gt; * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member op_Explicit : m:Matrix&lt;&#39;T&gt; -&gt; float [,]<br />&#160;&#160;static member ( * ) : a:&#39;T * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( * ) : a:Matrix&lt;&#39;T&gt; * b:&#39;T -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( * ) : a:Vector&lt;&#39;T&gt; * b:Matrix&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( * ) : a:Matrix&lt;&#39;T&gt; * b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt;<br />&#160;&#160;static member ( * ) : a:Matrix&lt;&#39;T&gt; * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( - ) : a:&#39;T * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( - ) : a:Matrix&lt;&#39;T&gt; * b:&#39;T -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( - ) : a:Matrix&lt;&#39;T&gt; * b:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br />&#160;&#160;static member ( ~- ) : a:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt;<br /><br />Full name: FsAlg.Generic.Matrix&lt;_&gt;</div>
+<div class="tip" id="fs7">val create : m:int -&gt; n:int -&gt; v:&#39;T -&gt; Matrix&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.create</div>
+<div class="tip" id="fs8">val m3 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m3</div>
+<div class="tip" id="fs9">val init : m:int -&gt; n:int -&gt; f:(int -&gt; int -&gt; &#39;T) -&gt; Matrix&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.init</div>
+<div class="tip" id="fs10">val i : int</div>
+<div class="tip" id="fs11">val j : int</div>
+<div class="tip" id="fs12">val exp : value:&#39;T -&gt; &#39;T (requires member Exp)<br /><br />Full name: Microsoft.FSharp.Core.Operators.exp</div>
+<div class="tip" id="fs13">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = System.Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
+<div class="tip" id="fs14">val printf : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printf</div>
+<div class="tip" id="fs15">val m4 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m4</div>
+<div class="tip" id="fs16">val m5 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m5</div>
+<div class="tip" id="fs17">val m6 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m6</div>
+<div class="tip" id="fs18">val m7 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m7</div>
+<div class="tip" id="fs19">val m8 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m8</div>
+<div class="tip" id="fs20">val v : Vector&lt;float&gt;<br /><br />Full name: Matrix-operations.v</div>
+<div class="tip" id="fs21">val vector : v:seq&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Ops.vector</div>
+<div class="tip" id="fs22">val m9 : Vector&lt;float&gt;<br /><br />Full name: Matrix-operations.m9</div>
+<div class="tip" id="fs23">val m10 : Vector&lt;float&gt;<br /><br />Full name: Matrix-operations.m10</div>
+<div class="tip" id="fs24">val m11 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m11</div>
+<div class="tip" id="fs25">val m12 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m12</div>
+<div class="tip" id="fs26">val m13 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m13</div>
+<div class="tip" id="fs27">val m14 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m14</div>
+<div class="tip" id="fs28">val m15 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m15</div>
+<div class="tip" id="fs29">val m16 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m16</div>
+<div class="tip" id="fs30">val m17 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m17</div>
+<div class="tip" id="fs31">val m1det : float<br /><br />Full name: Matrix-operations.m1det</div>
+<div class="tip" id="fs32">val det : m:Matrix&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.det</div>
+<div class="tip" id="fs33">val m1inv : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m1inv</div>
+<div class="tip" id="fs34">val inverse : m:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.inverse</div>
+<div class="tip" id="fs35">val m1eig : Vector&lt;float&gt;<br /><br />Full name: Matrix-operations.m1eig</div>
+<div class="tip" id="fs36">val eigenvalues : m:Matrix&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.eigenvalues</div>
+<div class="tip" id="fs37">val m1t : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m1t</div>
+<div class="tip" id="fs38">val transpose : m:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.transpose</div>
+<div class="tip" id="fs39">val m1tr : float<br /><br />Full name: Matrix-operations.m1tr</div>
+<div class="tip" id="fs40">val trace : m:Matrix&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.trace</div>
+<div class="tip" id="fs41">val m1dia : Vector&lt;float&gt;<br /><br />Full name: Matrix-operations.m1dia</div>
+<div class="tip" id="fs42">val diagonal : m:Matrix&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.diagonal</div>
+<div class="tip" id="fs43">val A : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.A</div>
+<div class="tip" id="fs44">val b : Vector&lt;float&gt;<br /><br />Full name: Matrix-operations.b</div>
+<div class="tip" id="fs45">val x : Vector&lt;float&gt;<br /><br />Full name: Matrix-operations.x</div>
+<div class="tip" id="fs46">val solve : a:Matrix&lt;&#39;T&gt; -&gt; b:Vector&lt;&#39;T&gt; -&gt; Vector&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.solve</div>
+<div class="tip" id="fs47">val lu : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.lu</div>
+<div class="tip" id="fs48">val piv : int []<br /><br />Full name: Matrix-operations.piv</div>
+<div class="tip" id="fs49">val togg : float<br /><br />Full name: Matrix-operations.togg</div>
+<div class="tip" id="fs50">val decomposeLU : m:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt; * int [] * &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.decomposeLU</div>
+<div class="tip" id="fs51">val q : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.q</div>
+<div class="tip" id="fs52">val r : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.r</div>
+<div class="tip" id="fs53">val decomposeQR : m:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;T&gt; * Matrix&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.decomposeQR</div>
+<div class="tip" id="fs54">val el1 : float<br /><br />Full name: Matrix-operations.el1</div>
+<div class="tip" id="fs55">val el2 : float<br /><br />Full name: Matrix-operations.el2</div>
+<div class="tip" id="fs56">val get : i:int -&gt; j:int -&gt; m:Matrix&lt;&#39;T&gt; -&gt; &#39;T (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.get</div>
+<div class="tip" id="fs57">val sl1 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.sl1</div>
+<div class="tip" id="fs58">val sl2 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.sl2</div>
+<div class="tip" id="fs59">val m18 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m18</div>
+<div class="tip" id="fs60">val ofSeq : s:seq&lt;seq&lt;&#39;T&gt;&gt; -&gt; Matrix&lt;&#39;T&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.ofSeq</div>
+<div class="tip" id="fs61">val m19 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m19</div>
+<div class="tip" id="fs62">val m20 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m20</div>
+<div class="tip" id="fs63">val m21 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m21</div>
+<div class="tip" id="fs64">Multiple items<br />val seq : sequence:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.Operators.seq<br /><br />--------------------<br />type seq&lt;&#39;T&gt; = System.Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.seq&lt;_&gt;</div>
+<div class="tip" id="fs65">val aa1 : float [] []<br /><br />Full name: Matrix-operations.aa1</div>
+<div class="tip" id="fs66">val toArray : m:Matrix&lt;&#39;T&gt; -&gt; &#39;T [] [] (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.toArray</div>
+<div class="tip" id="fs67">val aa2 : float [,]<br /><br />Full name: Matrix-operations.aa2</div>
+<div class="tip" id="fs68">val toArray2D : m:Matrix&lt;&#39;T&gt; -&gt; &#39;T [,] (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.toArray2D</div>
+<div class="tip" id="fs69">val s1 : string<br /><br />Full name: Matrix-operations.s1</div>
+<div class="tip" id="fs70">member Matrix.ToMathematicaString : unit -&gt; string</div>
+<div class="tip" id="fs71">val s2 : string<br /><br />Full name: Matrix-operations.s2</div>
+<div class="tip" id="fs72">member Matrix.ToMatlabString : unit -&gt; string</div>
+<div class="tip" id="fs73">val l1 : int<br /><br />Full name: Matrix-operations.l1</div>
+<div class="tip" id="fs74">val rows : m:Matrix&lt;&#39;T&gt; -&gt; int (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.rows</div>
+<div class="tip" id="fs75">val l2 : int<br /><br />Full name: Matrix-operations.l2</div>
+<div class="tip" id="fs76">val cols : m:Matrix&lt;&#39;T&gt; -&gt; int (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.cols</div>
+<div class="tip" id="fs77">val m22 : Matrix&lt;float&gt;<br /><br />Full name: Matrix-operations.m22</div>
+<div class="tip" id="fs78">val map : f:(&#39;T -&gt; &#39;U) -&gt; m:Matrix&lt;&#39;T&gt; -&gt; Matrix&lt;&#39;U&gt; (requires member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison and member get_Zero and member get_One and member ( + ) and member ( - ) and member ( * ) and member ( / ) and member ( ~- ) and member Abs and member Pow and member Sqrt and member op_Explicit and comparison)<br /><br />Full name: FsAlg.Generic.Matrix.map</div>
+<div class="tip" id="fs79">val x : float</div>
+<div class="tip" id="fs80">val sin : value:&#39;T -&gt; &#39;T (requires member Sin)<br /><br />Full name: Microsoft.FSharp.Core.Operators.sin</div>
+          
+        </div>
+        <div class="span3">
+          <a href="index.html">
+            <img src="img/fsalg-logo.png" style="width:140px;height:140px;margin:10px 0px 0px 20px;border-style:none;" />
+          </a>        
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">FsAlg</li>
+            <li class="divider"></li>
+            <li><a href="index.html">Home page</a></li>
+            <li><a href="https://www.nuget.org/packages/fsalg">Get FsAlg via NuGet</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg">GitHub Page</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg/releases">Release Notes</a></li>
+
+            <li class="nav-header">Getting Started</li>
+            <li class="divider"></li>
+            <li><a href="vector-operations.html">Vector Operations</a></li>
+            <li><a href="matrix-operations.html">Matrix Operations</a></li>
+
+            <li class="nav-header">Reference</li>
+            <li class="divider"></li>
+            <li><a href="reference/index.html">API Reference</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Start of StatCounter Code for Default Guide -->
+    <script type="text/javascript">
+    var sc_project=10379501; 
+    var sc_invisible=1; 
+    var sc_security="8dc39a9b"; 
+    var scJsHost = (("https:" == document.location.protocol) ?
+    "https://secure." : "http://www.");
+    document.write("<sc"+"ript type='text/javascript' src='" +
+    scJsHost+
+    "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript><div class="statcounter"><a title="free hit
+    counter" href="http://statcounter.com/free-hit-counter/"
+    target="_blank"><img class="statcounter"
+    src="http://c.statcounter.com/10379501/0/8dc39a9b/1/"
+    alt="free hit counter"></a></div></noscript>
+    <!-- End of StatCounter Code for Default Guide -->    
+  </body>
+</html>
