@@ -6,12 +6,12 @@ All rights reserved.
 
 FsAlg is released under the BSD license. (See accompanying LICENSE file.)
 
-    Written by: Atilim Gunes Baydin & Barak A. Pearlmutter
+Written by: Atilim Gunes Baydin & Barak A. Pearlmutter
 
     Brain and Computation Lab
-    Hamilton Institute & Department of Computer Science,
-    National University of Ireland Maynooth,
-    Maynooth, Co. Kildare,
+    Hamilton Institute & Department of Computer Science
+    National University of Ireland Maynooth
+    Maynooth, Co. Kildare
     Ireland
 
     www.bcl.hamilton.ie
