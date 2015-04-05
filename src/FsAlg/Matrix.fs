@@ -369,6 +369,10 @@ module Matrix =
     let inline create (m:int) (n:int) (v:'T):Matrix<'T> = Matrix (Array2D.create m n v)
     /// Creates a Matrix with `m` rows and all rows equal to array `v`
     let inline createRows (m:int) (v:'T[]):Matrix<'T> = Matrix (array2D (Array.init m (fun _ -> v)))
+    /// Gets the LU decomposition of Matrix `m`. The return values are the LU matrix, pivot indices, and a toggle value indicating the number of row exchanges during the decomposition, which is +1 if the number of exchanges were even, -1 if odd.
+    let inline decomposeLU (m:Matrix<'T>):(Matrix<'T>*int[]*'T) = m.GetLUDecomposition()
+    /// Gets the QR decomposition of Matrix `m`
+    let inline decomposeQR (m:Matrix<'T>):(Matrix<'T>*Matrix<'T>) = m.GetQRDecomposition()
     /// Gets the determinant of Matrix `m`
     let inline det (m:Matrix<'T>):'T = m.GetDeterminant()
     /// Gets the diagonal elements of matrix `m`
