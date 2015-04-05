@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Matrix - FsAlg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FsAlg: Generic Linear Algebra Library">
+    <meta name="author" content="Atılım Güneş Baydin; Barak A. Pearlmutter">
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="../misc/style.css" />
+    <script type="text/javascript" src="../misc/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/gbaydin/FsAlg">github page</a></li>
+        </ul>
+        <h3 class="muted">FsAlg</h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Matrix</h1>
+<div class="xmldoc">
+<p>Operations on Matrix type. (Implementing functionality similar to Microsoft.FSharp.Collections.Array2D)</p>
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '155', 155)" onmouseover="showTip(event, '155', 155)">
+            cols(m)
+          </code>
+          <div class="tip" id="155">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns the number of columns in Matrix <code>m</code>. This is the same with <code>Matrix.length2</code>.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '156', 156)" onmouseover="showTip(event, '156', 156)">
+            copy(m)
+          </code>
+          <div class="tip" id="156">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a copy of Matrix <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '157', 157)" onmouseover="showTip(event, '157', 157)">
+            create(m n v)
+          </code>
+          <div class="tip" id="157">
+            <strong>Signature:</strong> m:int -&gt; n:int -&gt; v:^T -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a Matrix with <code>m</code> rows, <code>n</code> columns, and all entries having value <code>v</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '158', 158)" onmouseover="showTip(event, '158', 158)">
+            createRows(m v)
+          </code>
+          <div class="tip" id="158">
+            <strong>Signature:</strong> m:int -&gt; v:^T [] -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a Matrix with <code>m</code> rows and all rows equal to array <code>v</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '159', 159)" onmouseover="showTip(event, '159', 159)">
+            det(m)
+          </code>
+          <div class="tip" id="159">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the determinant of Matrix <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '160', 160)" onmouseover="showTip(event, '160', 160)">
+            diagonal(m)
+          </code>
+          <div class="tip" id="160">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; Vector&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the diagonal elements of matrix <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '161', 161)" onmouseover="showTip(event, '161', 161)">
+            eigenvalues(m)
+          </code>
+          <div class="tip" id="161">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; Vector&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the eigenvalues of Matrix <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '162', 162)" onmouseover="showTip(event, '162', 162)">
+            get(i j m)
+          </code>
+          <div class="tip" id="162">
+            <strong>Signature:</strong> i:int -&gt; j:int -&gt; m:Matrix&lt;^T&gt; -&gt; ^T<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns the value of the entry with the given indices <code>i</code> and <code>j</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '163', 163)" onmouseover="showTip(event, '163', 163)">
+            identity(m)
+          </code>
+          <div class="tip" id="163">
+            <strong>Signature:</strong> m:int -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates the identity matrix with <code>m</code> rows and columns</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '164', 164)" onmouseover="showTip(event, '164', 164)">
+            init(m n f)
+          </code>
+          <div class="tip" id="164">
+            <strong>Signature:</strong> m:int -&gt; n:int -&gt; f:(int -&gt; int -&gt; ^T) -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a Matrix with <code>m</code> rows, <code>n</code> columns and a generator function <code>f</code> to compute the entries</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '165', 165)" onmouseover="showTip(event, '165', 165)">
+            initRows(m f)
+          </code>
+          <div class="tip" id="165">
+            <strong>Signature:</strong> m:int -&gt; f:(int -&gt; ^T []) -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a Matrix with <code>m</code> rows and a generator function <code>f</code> that gives each row as a an array</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '166', 166)" onmouseover="showTip(event, '166', 166)">
+            initSymmetric(m f)
+          </code>
+          <div class="tip" id="166">
+            <strong>Signature:</strong> m:int -&gt; f:(int -&gt; int -&gt; ^T) -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a square Matrix with <code>m</code> rows and columns and a generator function <code>f</code> to compute the elements. Function <code>f</code> is used only for populating the diagonal and the upper triangular part of the Matrix, the lower triangular part will be the reflection.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '167', 167)" onmouseover="showTip(event, '167', 167)">
+            inverse(m)
+          </code>
+          <div class="tip" id="167">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the inverse of Matrix <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '168', 168)" onmouseover="showTip(event, '168', 168)">
+            length1(m)
+          </code>
+          <div class="tip" id="168">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns the number of rows in Matrix <code>m</code>. This is the same with <code>Matrix.rows</code>.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '169', 169)" onmouseover="showTip(event, '169', 169)">
+            length2(m)
+          </code>
+          <div class="tip" id="169">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns the number of columns in Matrix <code>m</code>. This is the same with <code>Matrix.cols</code>.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '170', 170)" onmouseover="showTip(event, '170', 170)">
+            map(f m)
+          </code>
+          <div class="tip" id="170">
+            <strong>Signature:</strong> f:(^T -&gt; ^U) -&gt; m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^U&gt;<br />
+                          <strong>Type parameters:</strong> ^T, ^U          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a Matrix whose entries are the results of applying function <code>f</code> to each entry of Matrix <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '171', 171)" onmouseover="showTip(event, '171', 171)">
+            mapi(f m)
+          </code>
+          <div class="tip" id="171">
+            <strong>Signature:</strong> f:(int -&gt; int -&gt; ^T -&gt; ^U) -&gt; m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^U&gt;<br />
+                          <strong>Type parameters:</strong> ^T, ^U          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a Matrix whose entries are the results of applying function <code>f</code> to each entry of Matrix <code>m</code>. An element index is also supplied to function <code>f</code>.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '172', 172)" onmouseover="showTip(event, '172', 172)">
+            ofArray2D(m)
+          </code>
+          <div class="tip" id="172">
+            <strong>Signature:</strong> m:^T [,] -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a Matrix from 2d array <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '173', 173)" onmouseover="showTip(event, '173', 173)">
+            ofSeq(s)
+          </code>
+          <div class="tip" id="173">
+            <strong>Signature:</strong> s:seq&lt;seq&lt;^T&gt;&gt; -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a Matrix from sequence <code>s</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '174', 174)" onmouseover="showTip(event, '174', 174)">
+            rows(m)
+          </code>
+          <div class="tip" id="174">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns the number of rows in Matrix <code>m</code>. This is the same with <code>Matrix.length1</code>.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '175', 175)" onmouseover="showTip(event, '175', 175)">
+            solve(a b)
+          </code>
+          <div class="tip" id="175">
+            <strong>Signature:</strong> a:Matrix&lt;^T&gt; -&gt; b:Vector&lt;^T&gt; -&gt; Vector&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Solves a system of linear equations ax = b, where the coefficients are given in Matrix <code>a</code> and the result vector is Vector <code>b</code>. The returned vector will correspond to x.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '176', 176)" onmouseover="showTip(event, '176', 176)">
+            toArray(m)
+          </code>
+          <div class="tip" id="176">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T [] []<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts Matrix <code>m</code> to a jagged array, e.g. from Matrix<float> to float[][]</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '177', 177)" onmouseover="showTip(event, '177', 177)">
+            toArray2D(m)
+          </code>
+          <div class="tip" id="177">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T [,]<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts Matrix <code>m</code> to a 2d array, e.g. from Matrix<float> to float[,]</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '178', 178)" onmouseover="showTip(event, '178', 178)">
+            trace(m)
+          </code>
+          <div class="tip" id="178">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the trace of Matrix <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '179', 179)" onmouseover="showTip(event, '179', 179)">
+            transpose(m)
+          </code>
+          <div class="tip" id="179">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the transpose of Matrix <code>m</code></p>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <a href="../index.html">
+            <img src="../img/fsalg-logo.png" style="width:140px;height:140px;margin:10px 0px 0px 20px;border-style:none;" />
+          </a>
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">FsAlg</li>
+            <li><a href="../index.html">Home page</a></li>            
+            <li><a href="https://www.nuget.org/packages/fsalg">Get FsAlg via NuGet</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg">GitHub page</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg/releases">Release Notes</a></li>
+
+            <li class="nav-header">Reference</li>
+            <li class="divider"></li>
+            <li><a href="index.html">API Reference</a></li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

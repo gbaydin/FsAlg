@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Util - FsAlg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FsAlg: Generic Linear Algebra Library">
+    <meta name="author" content="Atılım Güneş Baydin; Barak A. Pearlmutter">
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="../misc/style.css" />
+    <script type="text/javascript" src="../misc/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/gbaydin/FsAlg">github page</a></li>
+        </ul>
+        <h3 class="muted">FsAlg</h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Util</h1>
+<div class="xmldoc">
+<p>Various utility functions for internal use</p>
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '184', 184)" onmouseover="showTip(event, '184', 184)">
+            copyUpperToLower arg1
+          </code>
+          <div class="tip" id="184">
+            <strong>Signature:</strong> &#39;?48587 [,] -&gt; &#39;?48587 [,]<br />
+                          <strong>Type parameters:</strong> '?48587          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Copies the upper triangular elements of the square matrix given in the 2d array <code>m</code> to the lower triangular part</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '185', 185)" onmouseover="showTip(event, '185', 185)">
+            diagonal arg1
+          </code>
+          <div class="tip" id="185">
+            <strong>Signature:</strong> &#39;?48583 [,] -&gt; &#39;?48583 []<br />
+                          <strong>Type parameters:</strong> '?48583          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets an array containing the diagonal elements of the square 2d array <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '186', 186)" onmouseover="showTip(event, '186', 186)">
+            isInteger a
+          </code>
+          <div class="tip" id="186">
+            <strong>Signature:</strong> a:float -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Checks whether a float contains an integer value</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '187', 187)" onmouseover="showTip(event, '187', 187)">
+            matrixSolveHelper lu b
+          </code>
+          <div class="tip" id="187">
+            <strong>Signature:</strong> lu:^a [,] -&gt; b:^a [] -&gt; ^a []<br />
+                          <strong>Type parameters:</strong> ^a, ^?48590          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Finds an array that, when multiplied by an LU matrix <code>lu</code>, gives array <code>b</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '188', 188)" onmouseover="showTip(event, '188', 188)">
+            trace m
+          </code>
+          <div class="tip" id="188">
+            <strong>Signature:</strong> m:^?48585 [,] -&gt; ^?48585<br />
+                          <strong>Type parameters:</strong> ^?48585          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the trace of the square matrix given in the 2d array <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '189', 189)" onmouseover="showTip(event, '189', 189)">
+            transpose m
+          </code>
+          <div class="tip" id="189">
+            <strong>Signature:</strong> m:&#39;?48581 [,] -&gt; &#39;?48581 [,]<br />
+                          <strong>Type parameters:</strong> '?48581          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the transpose of the 2d array <code>m</code></p>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Active patterns</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Active pattern</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '190', 190)" onmouseover="showTip(event, '190', 190)">
+            ( |Square| ) m
+          </code>
+          <div class="tip" id="190">
+            <strong>Signature:</strong> m:&#39;?48579 [,] -&gt; &#39;?48579 [,]<br />
+                          <strong>Type parameters:</strong> '?48579          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Checks whether the 2d array <code>m</code> has the same number of elements in both dimensions</p>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <a href="../index.html">
+            <img src="../img/fsalg-logo.png" style="width:140px;height:140px;margin:10px 0px 0px 20px;border-style:none;" />
+          </a>
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">FsAlg</li>
+            <li><a href="../index.html">Home page</a></li>            
+            <li><a href="https://www.nuget.org/packages/fsalg">Get FsAlg via NuGet</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg">GitHub page</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg/releases">Release Notes</a></li>
+
+            <li class="nav-header">Reference</li>
+            <li class="divider"></li>
+            <li><a href="index.html">API Reference</a></li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

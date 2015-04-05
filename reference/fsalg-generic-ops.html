@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ops - FsAlg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FsAlg: Generic Linear Algebra Library">
+    <meta name="author" content="Atılım Güneş Baydin; Barak A. Pearlmutter">
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="../misc/style.css" />
+    <script type="text/javascript" src="../misc/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/gbaydin/FsAlg">github page</a></li>
+        </ul>
+        <h3 class="muted">FsAlg</h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Ops</h1>
+<div class="xmldoc">
+<p>Linear algebra operations module (automatically opened)</p>
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '180', 180)" onmouseover="showTip(event, '180', 180)">
+            matrix m
+          </code>
+          <div class="tip" id="180">
+            <strong>Signature:</strong> m:seq&lt;seq&lt;^T&gt;&gt; -&gt; Matrix&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts 2d array <code>m</code> into a Matrix</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '181', 181)" onmouseover="showTip(event, '181', 181)">
+            matrixBy f m
+          </code>
+          <div class="tip" id="181">
+            <strong>Signature:</strong> f:(^T -&gt; ^U) -&gt; m:seq&lt;seq&lt;^T&gt;&gt; -&gt; Matrix&lt;^U&gt;<br />
+                          <strong>Type parameters:</strong> ^T, ^U          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts 2d array <code>m</code> into a Matrix, first passing the elements through a conversion function <code>f</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '182', 182)" onmouseover="showTip(event, '182', 182)">
+            vector v
+          </code>
+          <div class="tip" id="182">
+            <strong>Signature:</strong> v:seq&lt;^T&gt; -&gt; Vector&lt;^T&gt;<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts array, list, or sequence <code>v</code> into a Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '183', 183)" onmouseover="showTip(event, '183', 183)">
+            vectorBy f v
+          </code>
+          <div class="tip" id="183">
+            <strong>Signature:</strong> f:(^T -&gt; ^U) -&gt; v:seq&lt;^T&gt; -&gt; Vector&lt;^U&gt;<br />
+                          <strong>Type parameters:</strong> ^T, ^U          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts array, list, or sequence <code>v</code> into a Vector, first passing the elements through a conversion function <code>f</code></p>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <a href="../index.html">
+            <img src="../img/fsalg-logo.png" style="width:140px;height:140px;margin:10px 0px 0px 20px;border-style:none;" />
+          </a>
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">FsAlg</li>
+            <li><a href="../index.html">Home page</a></li>            
+            <li><a href="https://www.nuget.org/packages/fsalg">Get FsAlg via NuGet</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg">GitHub page</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg/releases">Release Notes</a></li>
+
+            <li class="nav-header">Reference</li>
+            <li class="divider"></li>
+            <li><a href="index.html">API Reference</a></li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

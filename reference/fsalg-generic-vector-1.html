@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Vector<'T> - FsAlg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FsAlg: Generic Linear Algebra Library">
+    <meta name="author" content="Atılım Güneş Baydin; Barak A. Pearlmutter">
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="../misc/style.css" />
+    <script type="text/javascript" src="../misc/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/gbaydin/FsAlg">github page</a></li>
+        </ul>
+        <h3 class="muted">FsAlg</h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Vector<'T></h1>
+<div class="xmldoc">
+<p>Generic vector type</p>
+</div>
+  <h3>Union Cases</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Union Case</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '270', 270)" onmouseover="showTip(event, '270', 270)">
+            Vector(^T [])
+          </code>
+          <div class="tip" id="270">
+            <strong>Signature:</strong> ^T []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '271', 271)" onmouseover="showTip(event, '271', 271)">
+            ZeroVector(^T)
+          </code>
+          <div class="tip" id="271">
+            <strong>Signature:</strong> ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Instance members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Instance member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '272', 272)" onmouseover="showTip(event, '272', 272)">
+            Convert(f)
+          </code>
+          <div class="tip" id="272">
+            <strong>Signature:</strong> (f:(^T -&gt; ^a)) -&gt; Vector&lt;^a&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts the elements of this Vector to another type, using the given conversion function <code>f</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '273', 273)" onmouseover="showTip(event, '273', 273)">
+            Copy()
+          </code>
+          <div class="tip" id="273">
+            <strong>Signature:</strong> unit -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a copy of this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '274', 274)" onmouseover="showTip(event, '274', 274)">
+            FirstItem
+          </code>
+          <div class="tip" id="274">
+            <strong>Signature:</strong> ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the first element of this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '275', 275)" onmouseover="showTip(event, '275', 275)">
+            GetL1Norm()
+          </code>
+          <div class="tip" id="275">
+            <strong>Signature:</strong> unit -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the L1 (Manhattan) norm of this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '276', 276)" onmouseover="showTip(event, '276', 276)">
+            GetL2Norm()
+          </code>
+          <div class="tip" id="276">
+            <strong>Signature:</strong> unit -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the L2 (Euclidean) norm of this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '277', 277)" onmouseover="showTip(event, '277', 277)">
+            GetL2NormSq()
+          </code>
+          <div class="tip" id="277">
+            <strong>Signature:</strong> unit -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the squared L2 (Euclidean) norm of this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '278', 278)" onmouseover="showTip(event, '278', 278)">
+            GetLPNorm(p)
+          </code>
+          <div class="tip" id="278">
+            <strong>Signature:</strong> p:^T -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the Lp norm (or p-norm) of this Vector, with the given <code>p</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '279', 279)" onmouseover="showTip(event, '279', 279)">
+            GetMax()
+          </code>
+          <div class="tip" id="279">
+            <strong>Signature:</strong> unit -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the maximum element of this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '280', 280)" onmouseover="showTip(event, '280', 280)">
+            GetMaxBy(f)
+          </code>
+          <div class="tip" id="280">
+            <strong>Signature:</strong> (f:(^T -&gt; &#39;?48396)) -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the maximum element of this Vector, compared by using Operators.max on the result of function <code>f</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '281', 281)" onmouseover="showTip(event, '281', 281)">
+            GetMin()
+          </code>
+          <div class="tip" id="281">
+            <strong>Signature:</strong> unit -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the minimum element of this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '282', 282)" onmouseover="showTip(event, '282', 282)">
+            GetMinBy(f)
+          </code>
+          <div class="tip" id="282">
+            <strong>Signature:</strong> (f:(^T -&gt; &#39;?48391)) -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the minimum element of this Vector, compared by using Operators.min on the result of function <code>f</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '283', 283)" onmouseover="showTip(event, '283', 283)">
+            GetSubVector(s, c)
+          </code>
+          <div class="tip" id="283">
+            <strong>Signature:</strong> (s:int * c:int) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Creates a new Vector that contains the given subrange of elements, specified by start index <code>s</code> and count <code>c</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '284', 284)" onmouseover="showTip(event, '284', 284)">
+            GetUnitVector()
+          </code>
+          <div class="tip" id="284">
+            <strong>Signature:</strong> unit -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the unit Vector codirectional with this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '285', 285)" onmouseover="showTip(event, '285', 285)">
+            [i]
+          </code>
+          <div class="tip" id="285">
+            <strong>Signature:</strong> i:int -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the element of this Vector at the given position <code>i</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '286', 286)" onmouseover="showTip(event, '286', 286)">
+            Length
+          </code>
+          <div class="tip" id="286">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the total number of elements of this Vector</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '287', 287)" onmouseover="showTip(event, '287', 287)">
+            Split(n)
+          </code>
+          <div class="tip" id="287">
+            <strong>Signature:</strong> n:int -&gt; seq&lt;Vector&lt;^T&gt;&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Returns a sequence of Vectors that are obtained by splitting this Vector into <code>n</code> subvectors of equal length. The length of this Vector must be an integer multiple of <code>n</code>, otherwise ArgumentException is raised.</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '288', 288)" onmouseover="showTip(event, '288', 288)">
+            ToArray()
+          </code>
+          <div class="tip" id="288">
+            <strong>Signature:</strong> unit -&gt; ^T []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts this Vector to an array</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '289', 289)" onmouseover="showTip(event, '289', 289)">
+            ToMathematicaString()
+          </code>
+          <div class="tip" id="289">
+            <strong>Signature:</strong> unit -&gt; string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets a string representation of this Vector that can be pasted into a Mathematica notebook</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '290', 290)" onmouseover="showTip(event, '290', 290)">
+            ToMatlabString()
+          </code>
+          <div class="tip" id="290">
+            <strong>Signature:</strong> unit -&gt; string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets a string representation of this Vector that can be pasted into MATLAB</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '291', 291)" onmouseover="showTip(event, '291', 291)">
+            ToSeq()
+          </code>
+          <div class="tip" id="291">
+            <strong>Signature:</strong> unit -&gt; seq&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts this Vector to a sequence</p>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Static members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Static member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '292', 292)" onmouseover="showTip(event, '292', 292)">
+            ( - )(a, b)
+          </code>
+          <div class="tip" id="292">
+            <strong>Signature:</strong> (a:^T * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Subtracts each element of Vector <code>b</code> from scalar <code>a</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '293', 293)" onmouseover="showTip(event, '293', 293)">
+            ( - )(a, b)
+          </code>
+          <div class="tip" id="293">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:^T) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Subtracts scalar <code>b</code> from each element of Vector <code>a</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '294', 294)" onmouseover="showTip(event, '294', 294)">
+            ( - )(a, b)
+          </code>
+          <div class="tip" id="294">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Subtracts Vector <code>b</code> from Vector <code>a</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '295', 295)" onmouseover="showTip(event, '295', 295)">
+            ( %* )(a, b)
+          </code>
+          <div class="tip" id="295">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Computes the cross product of Vector <code>a</code> and Vector <code>b</code> (three-dimensional)</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '296', 296)" onmouseover="showTip(event, '296', 296)">
+            ( * )(a, b)
+          </code>
+          <div class="tip" id="296">
+            <strong>Signature:</strong> (a:^T * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Multiplies each element of Vector <code>b</code> by scalar <code>a</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '297', 297)" onmouseover="showTip(event, '297', 297)">
+            ( * )(a, b)
+          </code>
+          <div class="tip" id="297">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:^T) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Multiplies each element of Vector <code>a</code> by scalar <code>b</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '298', 298)" onmouseover="showTip(event, '298', 298)">
+            ( * )(a, b)
+          </code>
+          <div class="tip" id="298">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:Vector&lt;^T&gt;) -&gt; ^T<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Computes the inner product (dot / scalar product) of Vector <code>a</code> and Vector <code>b</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '299', 299)" onmouseover="showTip(event, '299', 299)">
+            ( .* )(a, b)
+          </code>
+          <div class="tip" id="299">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Multiplies Vector <code>a</code> and Vector <code>b</code> element-wise (Hadamard product)</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '300', 300)" onmouseover="showTip(event, '300', 300)">
+            ( ./ )(a, b)
+          </code>
+          <div class="tip" id="300">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Divides Vector <code>a</code> by Vector <code>b</code> element-wise (Hadamard division)</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '301', 301)" onmouseover="showTip(event, '301', 301)">
+            ( / )(a, b)
+          </code>
+          <div class="tip" id="301">
+            <strong>Signature:</strong> (a:^T * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Divides scalar <code>a</code> by each element of Vector <code>b</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '302', 302)" onmouseover="showTip(event, '302', 302)">
+            ( / )(a, b)
+          </code>
+          <div class="tip" id="302">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:^T) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Divides each element of Vector <code>a</code> by scalar <code>b</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '303', 303)" onmouseover="showTip(event, '303', 303)">
+            ( ~- )(a)
+          </code>
+          <div class="tip" id="303">
+            <strong>Signature:</strong> a:Vector&lt;^T&gt; -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the negative of Vector <code>a</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '304', 304)" onmouseover="showTip(event, '304', 304)">
+            ( + )(a, b)
+          </code>
+          <div class="tip" id="304">
+            <strong>Signature:</strong> (a:^T * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Adds scalar <code>a</code> to each element of Vector <code>b</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '305', 305)" onmouseover="showTip(event, '305', 305)">
+            ( + )(a, b)
+          </code>
+          <div class="tip" id="305">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:^T) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Adds scalar <code>b</code> to each element of Vector <code>a</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '306', 306)" onmouseover="showTip(event, '306', 306)">
+            ( + )(a, b)
+          </code>
+          <div class="tip" id="306">
+            <strong>Signature:</strong> (a:Vector&lt;^T&gt; * b:Vector&lt;^T&gt;) -&gt; Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Adds Vector <code>a</code> to Vector <code>b</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '307', 307)" onmouseover="showTip(event, '307', 307)">
+            op_Explicit(v)
+          </code>
+          <div class="tip" id="307">
+            <strong>Signature:</strong> v:Vector&lt;^T&gt; -&gt; float []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts Vector <code>v</code> to float[]</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '308', 308)" onmouseover="showTip(event, '308', 308)">
+            Zero
+          </code>
+          <div class="tip" id="308">
+            <strong>Signature:</strong> Vector&lt;^T&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+          <p>ZeroVector</p>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <a href="../index.html">
+            <img src="../img/fsalg-logo.png" style="width:140px;height:140px;margin:10px 0px 0px 20px;border-style:none;" />
+          </a>
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">FsAlg</li>
+            <li><a href="../index.html">Home page</a></li>            
+            <li><a href="https://www.nuget.org/packages/fsalg">Get FsAlg via NuGet</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg">GitHub page</a></li>
+            <li><a href="http://github.com/gbaydin/FsAlg/releases">Release Notes</a></li>
+
+            <li class="nav-header">Reference</li>
+            <li class="divider"></li>
+            <li><a href="index.html">API Reference</a></li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
