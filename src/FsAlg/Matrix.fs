@@ -350,7 +350,7 @@ type Matrix<'T when 'T : (static member Zero : 'T)
             m' <- r * q
         m'.GetDiagonal()
 
-/// Operations on Matrix types. (Implementing functionality similar to Microsoft.FSharp.Collections.Array2D)
+/// Operations on Matrix type. (Implementing functionality similar to Microsoft.FSharp.Collections.Array2D)
 [<RequireQualifiedAccess>]
 module Matrix =
     /// Creates a Matrix from 2d array `m`

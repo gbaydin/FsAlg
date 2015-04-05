@@ -255,7 +255,7 @@ type Vector<'T when 'T : (static member Zero : 'T)
         | ZeroVector _ -> Vector.Zero
 
 
-/// Operations on Vector types. (Implementing functionality similar to Microsoft.FSharp.Collections.Array)
+/// Operations on Vector type. (Implementing functionality similar to Microsoft.FSharp.Collections.Array)
 [<RequireQualifiedAccess>]
 module Vector =
     /// Creates a Vector from sequence `s`
