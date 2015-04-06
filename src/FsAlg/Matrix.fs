@@ -76,7 +76,7 @@ type Matrix<'T when 'T : (static member Zero : 'T)
             let colStart = defaultArg colStart 0
             let colFinish = defaultArg colFinish (m.Cols - 1)
             Matrix mm.[rowStart..rowFinish, colStart..colFinish]
-        | ZeroMatrix z -> invalidArg "" "Cannot get slice of a ZeroMatrix."
+        | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
     /// Gets a row subvector of this Matrix with the given row index `row` and column bounds `colStart` and `colFinish`
     member inline m.GetSlice(row, colStart, colFinish) =
         match m with
@@ -84,7 +84,7 @@ type Matrix<'T when 'T : (static member Zero : 'T)
             let colStart = defaultArg colStart 0
             let colFinish = defaultArg colFinish (m.Cols - 1)
             Vector mm.[row, colStart..colFinish]
-        | ZeroMatrix z -> invalidArg "" "Cannot get slice of a ZeroMatrix."
+        | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
     /// Gets a column subvector of this Matrix with the given column index `col` and row bounds `rowStart` and `rowFinish`
     member inline m.GetSlice(rowStart, rowFinish, col) =
         match m with
@@ -92,7 +92,7 @@ type Matrix<'T when 'T : (static member Zero : 'T)
             let rowStart = defaultArg rowStart 0
             let rowFinish = defaultArg rowFinish (m.Rows - 1)
             Vector mm.[rowStart..rowFinish, col]
-        | ZeroMatrix z -> invalidArg "" "Cannot get slice of a ZeroMatrix."
+        | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
     /// Gets a string representation of this Matrix that can be pasted into a Mathematica notebook
     member inline m.ToMathematicaString() =
         let sb = System.Text.StringBuilder()

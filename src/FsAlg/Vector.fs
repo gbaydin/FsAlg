@@ -57,6 +57,14 @@ type Vector<'T when 'T : (static member Zero : 'T)
             match v with
             | Vector v -> v.[i]
             | ZeroVector z -> z
+    /// Gets a subvector between bounds `lower` and `upper`
+    member inline v.GetSlice(lower, upper) =
+        match v with
+        | Vector v ->
+            let l = defaultArg lower 0
+            let u = defaultArg upper (v.Length - 1)
+            Vector v.[l..u]
+        | ZeroVector _ -> invalidArg "" "Cannot get slice of a ZeroVector."
     /// Gets the first element of this Vector
     member inline v.FirstItem =
         match v with
