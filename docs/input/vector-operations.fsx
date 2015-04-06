@@ -86,10 +86,14 @@ Accessing Elements
 
 let e1 = v1.[0]          // 1st element of v1
 let e2 = Vector.get 1 v1 // 2nd element of v1
+let e3 = v1.[..1]        // Slice, until 2nd element
+let e4 = v1.[1..2]       // Slice, between 2nd and 3rd elements
 
 (*** hide, define-output: o4 ***)
 printf "val e1 : float = 1.0
-val e2 : float = 2.0"
+val e2 : float = 2.0
+val e3 : Vector<float> = Vector [|1.0; 2.0|]
+val e4 : Vector<float> = Vector [|2.0; 3.0|]"
 (*** include-output: o4 ***)
 
 (**
