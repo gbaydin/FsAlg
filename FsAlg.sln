@@ -5,10 +5,9 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsAlg", "src\FsAlg\FsAlg.fsproj", "{8715EA25-3B32-4CF5-A595-D4034442FE58}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsAlg.Docs", "docs\tools\FsAlg.Docs\FsAlg.Docs.fsproj", "{B1879D2A-D348-41EC-A547-8C0116383709}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{21FEAA04-EBA7-49C9-B0E6-0F244996DBAB}"
 	ProjectSection(SolutionItems) = preProject
+		docs\BuildDocs.fsx = docs\BuildDocs.fsx
 		docs\input\index.fsx = docs\input\index.fsx
 		docs\input\matrix-operations.fsx = docs\input\matrix-operations.fsx
 		docs\input\vector-operations.fsx = docs\input\vector-operations.fsx
@@ -24,10 +23,6 @@ Global
 		{8715EA25-3B32-4CF5-A595-D4034442FE58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8715EA25-3B32-4CF5-A595-D4034442FE58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8715EA25-3B32-4CF5-A595-D4034442FE58}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1879D2A-D348-41EC-A547-8C0116383709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1879D2A-D348-41EC-A547-8C0116383709}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1879D2A-D348-41EC-A547-8C0116383709}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1879D2A-D348-41EC-A547-8C0116383709}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
