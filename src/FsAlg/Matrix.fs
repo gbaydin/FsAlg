@@ -388,8 +388,6 @@ module Matrix =
     let inline eigenvalues (m:Matrix<'T>):Vector<'T> = m.GetEigenvalues() |> Vector.ofSeq
     /// Gets the entry of matrix `m` with indices `i` and `j`
     let inline get (m:Matrix<'T>) (i:int) (j:int):'T = m.[i, j]
-    /// Sets the entry of matrix `m` with indices `i` and `j` to value `a`
-    let inline set (m:Matrix<'T>) (i:int) (j:int) (a:'T) = m.[i, j] <- a
     /// Creates a matrix with `m` rows, `n` columns and a generator function `f` to compute the entries
     let inline init (m:int) (n:int) (f:int->int->'T):Matrix<'T> = Matrix (Array2D.init m n f)
     /// Creates a matrix with `m` rows and a generator function `f` that gives each row as a an array
@@ -420,6 +418,8 @@ module Matrix =
     let inline mapi (f:int->int->'T->'U) (m:Matrix<'T>):Matrix<'U> = m |> toArray2D |> Array2D.mapi f |> Matrix
     /// Returns the number of rows in matrix `m`. This is the same with `Matrix.length1`.
     let inline rows (m:Matrix<'T>):int = m.Rows
+    /// Sets the entry of matrix `m` with indices `i` and `j` to value `a`
+    let inline set (m:Matrix<'T>) (i:int) (j:int) (a:'T) = m.[i, j] <- a
     /// Solves a system of linear equations ax = b, where the coefficients are given in matrix `a` and the result vector is vector `b`. The returned vector will correspond to x.
     let inline solve (a:Matrix<'T>) (b:Vector<'T>):Vector<'T> =
         if a.Cols <> b.Length then invalidArg "" "Cannot solve the system of equations using a matrix and a vector of incompatible sizes."
