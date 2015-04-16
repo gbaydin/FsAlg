@@ -130,6 +130,13 @@ type Matrix<'T when 'T : (static member Zero : 'T)
     member inline m.ToArray() =
         let a = m.ToArray2D()
         [|for i = 0 to m.Rows - 1 do yield [|for j = 0 to m.Cols - 1 do yield a.[i, j]|]|]
+    /// Converts this matrix into a one dimensional sequence, scanning columns from left to right and rows from top to bottom
+    member inline m.ToSeq() =
+        let a = m.ToArray()
+        seq {for aa in a do yield! Seq.ofArray aa}
+    /// Returns an enumerator that iterates through this matrix
+    member inline m.GetEnumerator() =
+        m.ToSeq().GetEnumerator()
     /// Creates a copy of this matrix
     member inline m.Copy() = 
         match m with
@@ -365,6 +372,8 @@ module Matrix =
     let inline toArray2D (m:Matrix<'T>):'T[,] = m.ToArray2D()
     /// Converts matrix `m` to a jagged array, e.g. from Matrix<float> to float[][]
     let inline toArray (m:Matrix<'T>):'T[][] = m.ToArray()
+    /// Converts matrix `m` into a one dimensional sequence, scanning columns from left to right and rows from top to bottom
+    let inline toSeq (m:Matrix<'T>):seq<'T> = m.ToSeq()
     /// Returns the number of columns in matrix `m`. This is the same with `Matrix.length2`.
     let inline cols (m:Matrix<'T>):int = m.Cols
     /// Creates a copy of Matrix `m`

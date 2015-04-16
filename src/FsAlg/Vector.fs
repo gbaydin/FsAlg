@@ -176,6 +176,9 @@ type Vector<'T when 'T : (static member Zero : 'T)
         match v with
         | Vector v -> Vector (Array.sub v s c)
         | ZeroVector _ -> Vector.Zero
+    /// Returns an enumerator that iterates through the elements of this vector
+    member inline v.GetEnumerator() =
+        v.ToSeq().GetEnumerator()
     /// Adds vector `a` to vector `b`
     static member inline (+) (a:Vector<'T>, b:Vector<'T>):Vector<'T> =
         match a, b with
