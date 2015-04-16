@@ -68,7 +68,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Returns the number of columns in Matrix <code>m</code>. This is the same with <code>Matrix.length2</code>.</p>
+          <p>Returns the number of columns in matrix <code>m</code>. This is the same with <code>Matrix.length2</code>.</p>
 
         </td>
       </tr>
@@ -98,7 +98,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a Matrix with <code>m</code> rows, <code>n</code> columns, and all entries having value <code>v</code></p>
+          <p>Creates a matrix with <code>m</code> rows, <code>n</code> columns, and all entries having value <code>v</code></p>
 
         </td>
       </tr>
@@ -113,7 +113,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a Matrix with <code>m</code> rows and all rows equal to array <code>v</code></p>
+          <p>Creates a matrix with <code>m</code> rows and all rows equal to array <code>v</code></p>
 
         </td>
       </tr>
@@ -128,7 +128,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Gets the LU decomposition of Matrix <code>m</code>. The return values are the LU matrix, pivot indices, and a toggle value indicating the number of row exchanges during the decomposition, which is +1 if the number of exchanges were even, -1 if odd.</p>
+          <p>Gets the LU decomposition of matrix <code>m</code>. The return values are the LU matrix, pivot indices, and a toggle value indicating the number of row exchanges during the decomposition, which is +1 if the number of exchanges were even, -1 if odd.</p>
 
         </td>
       </tr>
@@ -143,7 +143,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Gets the QR decomposition of Matrix <code>m</code></p>
+          <p>Gets the QR decomposition of matrix <code>m</code></p>
 
         </td>
       </tr>
@@ -158,7 +158,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Gets the determinant of Matrix <code>m</code></p>
+          <p>Gets the determinant of matrix <code>m</code></p>
 
         </td>
       </tr>
@@ -188,7 +188,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Gets the eigenvalues of Matrix <code>m</code></p>
+          <p>Gets the eigenvalues of matrix <code>m</code></p>
 
         </td>
       </tr>
@@ -196,14 +196,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
-            get(i j m)
+            get(m i j)
           </code>
           <div class="tip" id="10">
-            <strong>Signature:</strong> i:int -&gt; j:int -&gt; m:Matrix&lt;^T&gt; -&gt; ^T<br />
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; i:int -&gt; j:int -&gt; ^T<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Returns the value of the entry with the given indices <code>i</code> and <code>j</code></p>
+          <p>Gets the entry of matrix <code>m</code> with indices <code>i</code> and <code>j</code></p>
 
         </td>
       </tr>
@@ -233,7 +233,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a Matrix with <code>m</code> rows, <code>n</code> columns and a generator function <code>f</code> to compute the entries</p>
+          <p>Creates a matrix with <code>m</code> rows, <code>n</code> columns and a generator function <code>f</code> to compute the entries</p>
 
         </td>
       </tr>
@@ -248,7 +248,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a Matrix with <code>m</code> rows and a generator function <code>f</code> that gives each row as a an array</p>
+          <p>Creates a matrix with <code>m</code> rows and a generator function <code>f</code> that gives each row as a an array</p>
 
         </td>
       </tr>
@@ -263,7 +263,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a square Matrix with <code>m</code> rows and columns and a generator function <code>f</code> to compute the elements. Function <code>f</code> is used only for populating the diagonal and the upper triangular part of the Matrix, the lower triangular part will be the reflection.</p>
+          <p>Creates a square matrix with <code>m</code> rows and columns and a generator function <code>f</code> to compute the elements. Function <code>f</code> is used only for populating the diagonal and the upper triangular part of the matrix, the lower triangular part will be the reflection.</p>
 
         </td>
       </tr>
@@ -278,7 +278,7 @@
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Gets the inverse of Matrix <code>m</code></p>
+          <p>Gets the inverse of matrix <code>m</code></p>
 
         </td>
       </tr>
@@ -286,14 +286,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
-            length1(m)
+            iter(f m)
           </code>
           <div class="tip" id="16">
-            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+            <strong>Signature:</strong> f:(^T -&gt; unit) -&gt; m:Matrix&lt;^T&gt; -&gt; unit<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Returns the number of rows in Matrix <code>m</code>. This is the same with <code>Matrix.rows</code>.</p>
+          <p>Applies function <code>f</code> to each element of matrix <code>m</code></p>
 
         </td>
       </tr>
@@ -301,14 +301,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
-            length2(m)
+            iteri(f m)
           </code>
           <div class="tip" id="17">
-            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+            <strong>Signature:</strong> f:(int -&gt; int -&gt; ^T -&gt; unit) -&gt; m:Matrix&lt;^T&gt; -&gt; unit<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Returns the number of columns in Matrix <code>m</code>. This is the same with <code>Matrix.cols</code>.</p>
+          <p>Applies function <code>f</code> to each element of matrix <code>m</code>. The integer indices passed to <code>f</code> indicate the index of the element.</p>
 
         </td>
       </tr>
@@ -316,14 +316,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
-            map(f m)
+            length1(m)
           </code>
           <div class="tip" id="18">
-            <strong>Signature:</strong> f:(^T -&gt; ^U) -&gt; m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^U&gt;<br />
-                          <strong>Type parameters:</strong> ^T, ^U          </div>
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+                          <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a Matrix whose entries are the results of applying function <code>f</code> to each entry of Matrix <code>m</code></p>
+          <p>Returns the number of rows in matrix <code>m</code>. This is the same with <code>Matrix.rows</code>.</p>
 
         </td>
       </tr>
@@ -331,14 +331,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
-            mapi(f m)
+            length2(m)
           </code>
           <div class="tip" id="19">
-            <strong>Signature:</strong> f:(int -&gt; int -&gt; ^T -&gt; ^U) -&gt; m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^U&gt;<br />
-                          <strong>Type parameters:</strong> ^T, ^U          </div>
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+                          <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a Matrix whose entries are the results of applying function <code>f</code> to each entry of Matrix <code>m</code>. An element index is also supplied to function <code>f</code>.</p>
+          <p>Returns the number of columns in matrix <code>m</code>. This is the same with <code>Matrix.cols</code>.</p>
 
         </td>
       </tr>
@@ -346,14 +346,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
-            ofArray2D(m)
+            map(f m)
           </code>
           <div class="tip" id="20">
-            <strong>Signature:</strong> m:^T [,] -&gt; Matrix&lt;^T&gt;<br />
-                          <strong>Type parameters:</strong> ^T          </div>
+            <strong>Signature:</strong> f:(^T -&gt; ^U) -&gt; m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^U&gt;<br />
+                          <strong>Type parameters:</strong> ^T, ^U          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a Matrix from 2d array <code>m</code></p>
+          <p>Creates a matrix whose entries are the results of applying function <code>f</code> to each entry of matrix <code>m</code></p>
 
         </td>
       </tr>
@@ -361,14 +361,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
-            ofSeq(s)
+            mapi(f m)
           </code>
           <div class="tip" id="21">
-            <strong>Signature:</strong> s:seq&lt;seq&lt;^T&gt;&gt; -&gt; Matrix&lt;^T&gt;<br />
-                          <strong>Type parameters:</strong> ^T          </div>
+            <strong>Signature:</strong> f:(int -&gt; int -&gt; ^T -&gt; ^U) -&gt; m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^U&gt;<br />
+                          <strong>Type parameters:</strong> ^T, ^U          </div>
         </td>
         <td class="xmldoc">
-          <p>Creates a Matrix from sequence <code>s</code></p>
+          <p>Creates a matrix whose entries are the results of applying function <code>f</code> to each entry of matrix <code>m</code>. An element index is also supplied to function <code>f</code>.</p>
 
         </td>
       </tr>
@@ -376,14 +376,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
-            rows(m)
+            ofArray2D(m)
           </code>
           <div class="tip" id="22">
-            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
+            <strong>Signature:</strong> m:^T [,] -&gt; Matrix&lt;^T&gt;<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Returns the number of rows in Matrix <code>m</code>. This is the same with <code>Matrix.length1</code>.</p>
+          <p>Creates a matrix from 2d array <code>m</code></p>
 
         </td>
       </tr>
@@ -391,14 +391,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
-            solve(a b)
+            ofSeq(s)
           </code>
           <div class="tip" id="23">
-            <strong>Signature:</strong> a:Matrix&lt;^T&gt; -&gt; b:Vector&lt;^T&gt; -&gt; Vector&lt;^T&gt;<br />
+            <strong>Signature:</strong> s:seq&lt;seq&lt;^T&gt;&gt; -&gt; Matrix&lt;^T&gt;<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Solves a system of linear equations ax = b, where the coefficients are given in Matrix <code>a</code> and the result vector is Vector <code>b</code>. The returned vector will correspond to x.</p>
+          <p>Creates a matrix from sequence of sequences <code>s</code></p>
 
         </td>
       </tr>
@@ -406,14 +406,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
-            toArray(m)
+            rows(m)
           </code>
           <div class="tip" id="24">
-            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T [] []<br />
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; int<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Converts Matrix <code>m</code> to a jagged array, e.g. from Matrix<float> to float[][]</p>
+          <p>Returns the number of rows in matrix <code>m</code>. This is the same with <code>Matrix.length1</code>.</p>
 
         </td>
       </tr>
@@ -421,14 +421,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
-            toArray2D(m)
+            set(m i j a)
           </code>
           <div class="tip" id="25">
-            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T [,]<br />
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; i:int -&gt; j:int -&gt; a:^T -&gt; unit<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Converts Matrix <code>m</code> to a 2d array, e.g. from Matrix<float> to float[,]</p>
+          <p>Sets the entry of matrix <code>m</code> with indices <code>i</code> and <code>j</code> to value <code>a</code></p>
 
         </td>
       </tr>
@@ -436,14 +436,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '26', 26)" onmouseover="showTip(event, '26', 26)">
-            trace(m)
+            solve(a b)
           </code>
           <div class="tip" id="26">
-            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T<br />
+            <strong>Signature:</strong> a:Matrix&lt;^T&gt; -&gt; b:Vector&lt;^T&gt; -&gt; Vector&lt;^T&gt;<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Gets the trace of Matrix <code>m</code></p>
+          <p>Solves a system of linear equations ax = b, where the coefficients are given in matrix <code>a</code> and the result vector is vector <code>b</code>. The returned vector will correspond to x.</p>
 
         </td>
       </tr>
@@ -451,14 +451,59 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '27', 27)" onmouseover="showTip(event, '27', 27)">
-            transpose(m)
+            toArray(m)
           </code>
           <div class="tip" id="27">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T [] []<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts matrix <code>m</code> to a jagged array, e.g. from Matrix<float> to float[][]</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '28', 28)" onmouseover="showTip(event, '28', 28)">
+            toArray2D(m)
+          </code>
+          <div class="tip" id="28">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T [,]<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Converts matrix <code>m</code> to a 2d array, e.g. from Matrix<float> to float[,]</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '29', 29)" onmouseover="showTip(event, '29', 29)">
+            trace(m)
+          </code>
+          <div class="tip" id="29">
+            <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; ^T<br />
+                          <strong>Type parameters:</strong> ^T          </div>
+        </td>
+        <td class="xmldoc">
+          <p>Gets the trace of matrix <code>m</code></p>
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '30', 30)" onmouseover="showTip(event, '30', 30)">
+            transpose(m)
+          </code>
+          <div class="tip" id="30">
             <strong>Signature:</strong> m:Matrix&lt;^T&gt; -&gt; Matrix&lt;^T&gt;<br />
                           <strong>Type parameters:</strong> ^T          </div>
         </td>
         <td class="xmldoc">
-          <p>Gets the transpose of Matrix <code>m</code></p>
+          <p>Gets the transpose of matrix <code>m</code></p>
 
         </td>
       </tr>
