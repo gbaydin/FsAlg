@@ -279,6 +279,8 @@ module Vector =
     let inline toArray (v:Vector<'T>):'T[] = v.ToArray()
     /// Returns vector `v` as a sequence
     let inline toSeq (v:Vector<'T>):seq<'T> = v.ToSeq()
+    /// Creates a vector that contains the elements of vector `v1` followed by the elements of vector `v2`
+    let inline append (v1:Vector<'T>) (v2:Vector<'T>):Vector<'T> = Array.append (v1 |> toArray) (v2 |> toArray) |> Vector
     /// Builds a new vector that contains the elements of each of the given sequence of vectors `v`
     let inline concat (v:seq<Vector<'T>>):Vector<'T> = Seq.map toArray v |> Array.concat |> ofSeq
     /// Creates a copy of vector `v`
@@ -291,6 +293,8 @@ module Vector =
     let inline exists (p:'T->bool) (v:Vector<'T>):bool = v |> toArray |> Array.exists p
     /// Tests if any pair of corresponding elements of vectors `v1` and `v2` satisfies predicate `p`
     let inline exists2 (p:'T1->'T2->bool) (v1:Vector<'T1>) (v2:Vector<'T2>):bool = Array.exists2 p (v1 |> toArray) (v2 |> toArray)
+    /// Fills a range of elements of vector `v` with value `a` starting with index `s` and counting `c` elements
+    let inline fill (v:Vector<'T>) (s:int) (c:int) (a:'T):unit = Array.fill (v |> toArray) s c a
     /// Returns the first element of vector `v` for which predicate `p` is true
     let inline find (p:'T->bool) (v:Vector<'T>):'T = v |> toArray |> Array.find p
     /// Returns the index of the first element of vector `v` for which predicate `p` is true
@@ -305,6 +309,8 @@ module Vector =
     let inline foldBack2 (f:'T1->'T2->'S->'S) (v1:Vector<'T1>) (v2:Vector<'T2>) (s:'S):'S = Array.foldBack2 f (v1 |> toArray) (v2 |> toArray) s
     /// Tests if all elements of vector `v` satisfy predicate `p`
     let inline forall (p:'T->bool) (v:Vector<'T>):bool = v |> toArray |> Array.forall p
+    /// Tests if all corresponding elements of vectors `v1` and `v2` satisfy predicate `p` pairwise
+    let inline forall2 (p:'T1->'T2->bool) (v1:Vector<'T1>) (v2:Vector<'T2>):bool = Array.forall2 p (v1 |> toArray) (v2 |> toArray)
     /// Gets the element of vector `v` with index `i`
     let inline get (v:Vector<'T>) (i:int):'T = v.[i]
     /// Creates a vector with dimension `n` and a generator function `f` to compute the elements
@@ -351,6 +357,10 @@ module Vector =
     let inline reduce (f:'T->'T->'T) (v:Vector<'T>):'T = v |> toArray |> Array.reduce f
     /// Applies function `f` to each element of vector `v`, threading an accumulator argument through the computation. If the input function is f and the elements are i0...iN then computes f i0 (...(f iN-1 iN)).
     let inline reduceBack (f:'T->'T->'T) (v:Vector<'T>):'T = v |> toArray |> Array.reduceBack f
+    /// Replaces the elements of vector `v` by mutating them in place, passing them through function `f`
+    let inline replace (f:'T->'T) (v:Vector<'T>):unit = for i in 0..(v.Length - 1) do v.[i] <- f v.[i]
+    /// Replaces the elements of vector `v` by mutating them in place, passing them through function `f`. An element index is also supplied to function `f`.
+    let inline replacei (f:int->'T->'T) (v:Vector<'T>):unit = for i in 0..(v.Length - 1) do v.[i] <- f i v.[i]
     /// Like Vector.fold, but returns the intermediate and final results
     let inline scan (f:'S->'T->'S) (s:'S) (v:Vector<'T>):Vector<'S> = v |> toArray |> Array.scan f s |> ofSeq
     /// Like Vector.foldBack, but returns both the intermediate and final results

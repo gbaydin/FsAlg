@@ -415,7 +415,7 @@ module Matrix =
     let inline inverse (m:Matrix<'T>):Matrix<'T> = m.GetInverse()
     /// Applies function `f` to each element of matrix `m`
     let inline iter (f:'T->unit) (m:Matrix<'T>):unit = m |> toArray2D |> Array2D.iter f
-    /// Applies function `f` to each element of matrix `m`. The integer indices passed to `f` indicate the index of the element.
+    /// Applies function `f` to each element of matrix `m`. Element indices are also supplied to function `f`.
     let inline iteri (f:int->int->'T->unit) (m:Matrix<'T>):unit = m |> toArray2D |> Array2D.iteri f
     /// Returns the number of rows in matrix `m`. This is the same with `Matrix.rows`.
     let inline length1 (m:Matrix<'T>):int = m.Rows
@@ -423,8 +423,18 @@ module Matrix =
     let inline length2 (m:Matrix<'T>):int = m.Cols
     /// Creates a matrix whose entries are the results of applying function `f` to each entry of matrix `m`
     let inline map (f:'T->'U) (m:Matrix<'T>):Matrix<'U> = m |> toArray2D |> Array2D.map f |> Matrix
-    /// Creates a matrix whose entries are the results of applying function `f` to each entry of matrix `m`. An element index is also supplied to function `f`.
+    /// Creates a matrix whose entries are the results of applying function `f` to each entry of matrix `m`. Element indices are also supplied to function `f`.
     let inline mapi (f:int->int->'T->'U) (m:Matrix<'T>):Matrix<'U> = m |> toArray2D |> Array2D.mapi f |> Matrix
+    /// Replaces the elements of matrix `m` by mutating them in place, passing them through function `f`
+    let inline replace (f:'T->'T) (m:Matrix<'T>):unit =
+        for i in 0..(m.Rows - 1) do
+            for j in 0..(m.Cols - 1) do
+                m.[i,j] <- f m.[i,j]
+    /// Replaces the elements of matrix `m` by mutating them in place, passing them through function` f`. Element indices are also supplied to function `f`.
+    let inline replacei (f:int->int->'T->'T) (m:Matrix<'T>):unit =
+        for i in 0..(m.Rows - 1) do
+            for j in 0..(m.Cols - 1) do
+                m.[i,j] <- f i j m.[i,j]
     /// Returns the number of rows in matrix `m`. This is the same with `Matrix.length1`.
     let inline rows (m:Matrix<'T>):int = m.Rows
     /// Sets the entry of matrix `m` with indices `i` and `j` to value `a`
