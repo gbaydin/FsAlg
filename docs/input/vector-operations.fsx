@@ -85,7 +85,7 @@ Accessing Elements
 *)
 
 let e1 = v1.[0]          // 1st element of v1
-let e2 = Vector.get 1 v1 // 2nd element of v1
+let e2 = Vector.get v1 1 // 2nd element of v1
 let e3 = v1.[..1]        // Slice, until 2nd element
 let e4 = v1.[1..2]       // Slice, between 2nd and 3rd elements
 

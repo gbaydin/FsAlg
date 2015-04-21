@@ -185,7 +185,7 @@ Accessing Elements
 *)
 
 let el1 = m1.[0, 0]         // Element at 0, 0
-let el2 = Matrix.get 1 1 m1 // Element at 1, 1
+let el2 = Matrix.get m1 1 1 // Element at 1, 1
 let sl1 = m1.[0..1, 1..]    // Slice, between rows 0 and 1, columns 1 and beyond
 let sl2 = m1.[*, 0..1]      // Slice, all rows, between columns 0 and 1
 
