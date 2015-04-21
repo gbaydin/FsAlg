@@ -97,6 +97,14 @@ val e4 : Vector<float> = Vector [|2.0; 3.0|]"
 (*** include-output: o4 ***)
 
 (**
+Replacing Elements
+------------------
+*)
+v1.[0] <- 4. // Mutate an element
+Vector.replace (fun x -> x + 2.) v1 // Replace by mapping a function, mutating in place
+Vector.replacei (fun i x -> x + float i) v1 // Replace in place, with index
+
+(**
 Splitting and Concatenating
 ---------------------------   
 *)

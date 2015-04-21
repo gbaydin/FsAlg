@@ -199,6 +199,15 @@ val sl2 : Matrix<float> = Matrix [[1.0; 2.0]
 (*** include-output: o6 ***)
 
 (**
+Replacing Elements
+------------------
+*)
+
+m1.[0, 0] <- 4. // Mutate an element
+Matrix.replace (fun x -> x + 2.) m1 // Replace by mapping a function, mutating in place
+Matrix.replacei (fun i j x -> x + float (i * j)) m1 // Replace in place, with index
+
+(**
 Conversions
 -----------
 *)
