@@ -199,13 +199,15 @@ val sl2 : Matrix<float> = Matrix [[1.0; 2.0]
 (*** include-output: o6 ***)
 
 (**
-Replacing Elements
+Mutating/Replacing Elements
 ------------------
 *)
 
 m1.[0, 0] <- 4. // Mutate an element
 Matrix.replace (fun x -> x + 2.) m1 // Replace by mapping a function, mutating in place
 Matrix.replacei (fun i j x -> x + float (i * j)) m1 // Replace in place, with index
+Matrix.replace2 (fun x y -> x - y) m1 m2 // Replace m1 in place, using a function of m1 and m2
+Matrix.replacei2 (fun i j x y -> x - y + float (i * j)) m1 m2 // Replace m1 in place, with index
 
 (**
 Conversions
@@ -247,8 +249,9 @@ val s2 : string = \"[1.00 1.00; 1.00 1.00]\""
 (*** include-output: o8 ***)
 
 (**
-Some Other Operations
+Other Operations
 ---------------------   
+The following are just a selection of other operations. Please refer to [API Reference](reference/index.html) for a full list of supported operations.
 *)
 
 let l1  = Matrix.rows m1 // Number of rows

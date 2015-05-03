@@ -97,12 +97,14 @@ val e4 : Vector<float> = Vector [|2.0; 3.0|]"
 (*** include-output: o4 ***)
 
 (**
-Replacing Elements
+Mutating/Replacing Elements
 ------------------
 *)
 v1.[0] <- 4. // Mutate an element
 Vector.replace (fun x -> x + 2.) v1 // Replace by mapping a function, mutating in place
 Vector.replacei (fun i x -> x + float i) v1 // Replace in place, with index
+Vector.replace2 (fun x y -> x - y) v1 v2 // Replace v1 in place, using a function of v1 and v2
+Vector.replacei2 (fun i x y -> x - y + float i) v1 v2 // Replace v1 in place, with index
 
 (**
 Splitting and Concatenating
@@ -154,8 +156,9 @@ val s2 : string = \"[1.00 2.00 3.00]\""
 (*** include-output: o7 ***)
 
 (**
-Some Other Operations
+Other Operations
 ---------------------
+The following are just a selection of other operations. Please refer to [API Reference](reference/index.html) for a full list of supported operations.
 *)
 
 let len = Vector.length v1 // Length of vector
