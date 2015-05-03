@@ -429,12 +429,24 @@ module Matrix =
     let inline replace (f:'T->'T) (m:Matrix<'T>):unit =
         for i in 0..(m.Rows - 1) do
             for j in 0..(m.Cols - 1) do
-                m.[i,j] <- f m.[i,j]
+                m.[i,j] <- f m.[i, j]
+    /// Replaces the elements of matrix `m1` by mutating them in place. The new values are computed by applying function `f` to the corresponding elements of matrices `m1` and `m2` pairwise. The two input matrices should have the same dimensions, otherwise ArgumentException is raised.
+    let inline replace2 (f:'T1->'T2->'T1) (m1:Matrix<'T1>) (m2:Matrix<'T2>):unit =
+        if (m1.Rows <> m2.Rows) || (m1.Cols <> m2.Cols) then invalidArg "" "The matrices should have the same dimensions."
+        for i in 0..(m1.Rows - 1) do
+            for j in 0..(m1.Cols - 1) do
+                m1.[i, j] <- f m1.[i, j] m2.[i, j]
     /// Replaces the elements of matrix `m` by mutating them in place, passing them through function` f`. Element indices are also supplied to function `f`.
     let inline replacei (f:int->int->'T->'T) (m:Matrix<'T>):unit =
         for i in 0..(m.Rows - 1) do
             for j in 0..(m.Cols - 1) do
-                m.[i,j] <- f i j m.[i,j]
+                m.[i,j] <- f i j m.[i, j]
+    /// Replaces the elements of matrix `m1` by mutating them in place. The new values are computed by applying function `f` to the corresponding elements of matrices `m1` and `m2` pairwise. Element indices are also supplied to function `f`. The two input matrices should have the same dimensions, otherwise ArgumentException is raised.
+    let inline replacei2 (f:int->int->'T1->'T2->'T1) (m1:Matrix<'T1>) (m2:Matrix<'T2>):unit =
+        if (m1.Rows <> m2.Rows) || (m1.Cols <> m2.Cols) then invalidArg "" "The matrices should have the same dimensions."
+        for i in 0..(m1.Rows - 1) do
+            for j in 0..(m1.Cols - 1) do
+                m1.[i, j] <- f i j m1.[i, j] m2.[i, j]
     /// Returns the number of rows in matrix `m`. This is the same with `Matrix.length1`.
     let inline rows (m:Matrix<'T>):int = m.Rows
     /// Sets the entry of matrix `m` with indices `i` and `j` to value `a`
