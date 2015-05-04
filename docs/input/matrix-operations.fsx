@@ -208,6 +208,7 @@ Matrix.replace (fun x -> x + 2.) m1 // Replace by mapping a function, mutating i
 Matrix.replacei (fun i j x -> x + float (i * j)) m1 // Replace in place, with index
 Matrix.replace2 (fun x y -> x - y) m1 m2 // Replace m1 in place, using a function of m1 and m2
 Matrix.replacei2 (fun i j x y -> x - y + float (i * j)) m1 m2 // Replace m1 in place, with index
+Matrix.replaceWith m1 m2 // Replace elements of m1 with m2, mutating in place
 
 (**
 Conversions

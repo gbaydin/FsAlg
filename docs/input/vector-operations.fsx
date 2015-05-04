@@ -105,6 +105,7 @@ Vector.replace (fun x -> x + 2.) v1 // Replace by mapping a function, mutating i
 Vector.replacei (fun i x -> x + float i) v1 // Replace in place, with index
 Vector.replace2 (fun x y -> x - y) v1 v2 // Replace v1 in place, using a function of v1 and v2
 Vector.replacei2 (fun i x y -> x - y + float i) v1 v2 // Replace v1 in place, with index
+Vector.replaceWith v1 v2 // Replace elements of v1 with v2, mutating in place
 
 (**
 Splitting and Concatenating
