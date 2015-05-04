@@ -447,6 +447,10 @@ module Matrix =
         for i in 0..(m1.Rows - 1) do
             for j in 0..(m1.Cols - 1) do
                 m1.[i, j] <- f i j m1.[i, j] m2.[i, j]
+    /// Replaces the elements of matrix `m1` with the elements of matrix `m2`, by mutating them in place. The two input matrices should have the same dimensions, otherwise ArgumentException is raised.
+    let inline replaceWith (m1:Matrix<'T>) (m2:Matrix<'T>) =
+        if (m1.Rows <> m2.Rows) || (m1.Cols <> m2.Cols) then invalidArg "" "The matrices should have the same dimensions."
+        Array2D.blit (m2 |> toArray2D) 0 0 (m1 |> toArray2D) 0 0 m1.Rows m1.Cols
     /// Returns the number of rows in matrix `m`. This is the same with `Matrix.length1`.
     let inline rows (m:Matrix<'T>):int = m.Rows
     /// Sets the entry of matrix `m` with indices `i` and `j` to value `a`

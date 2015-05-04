@@ -369,6 +369,10 @@ module Vector =
     let inline replacei2 (f:int->'T1->'T2->'T1) (v1:Vector<'T1>) (v2:Vector<'T2>):unit = 
         if v1.Length <> v2.Length then invalidArg "" "The vectors should have the same length."
         for i in 0..(v1.Length - 1) do v1.[i] <- f i v1.[i] v2.[i]
+    /// Replaces the elements of vector `v1` with the elements of vector `v2`, by mutating them in place. The two input vectors must have the same lengths, otherwise ArgumentException is raised.
+    let inline replaceWith (v1:Vector<'T>) (v2:Vector<'T>):unit = 
+        if v1.Length <> v2.Length then invalidArg "" "The vectors should have the same length."
+        Array.blit (v2 |> toArray) 0 (v1 |> toArray) 0 v1.Length
     /// Like Vector.fold, but returns the intermediate and final results
     let inline scan (f:'S->'T->'S) (s:'S) (v:Vector<'T>):Vector<'S> = v |> toArray |> Array.scan f s |> ofSeq
     /// Like Vector.foldBack, but returns both the intermediate and final results
