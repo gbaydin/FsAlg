@@ -366,14 +366,30 @@ type Matrix<'T when 'T : (static member Zero : 'T)
 module Matrix =
     /// Creates a matrix from 2d array `m`
     let inline ofArray2D (m:'T[,]):Matrix<'T> = Matrix m
-    /// Creates a matrix from sequence of sequences `s`
-    let inline ofSeq (s:seq<seq<'T>>):Matrix<'T> = s |> Array.ofSeq |> Array.ofSeq |> array2D |> Matrix
     /// Converts matrix `m` to a 2d array, e.g. from Matrix<float> to float[,]
     let inline toArray2D (m:Matrix<'T>):'T[,] = m.ToArray2D()
+    /// Creates a matrix from a jagged array, e.g. from float[][] to Matrix<float>
+    let inline ofArrayArray (m:'T[][]):Matrix<'T> = m |> array2D |> Matrix
     /// Converts matrix `m` to a jagged array, e.g. from Matrix<float> to float[][]
-    let inline toArray (m:Matrix<'T>):'T[][] = m.ToArray()
-    /// Converts matrix `m` into a one dimensional sequence, scanning columns from left to right and rows from top to bottom
+    let inline toArrayArray (m:Matrix<'T>):'T[][] = m.ToArray()
+    /// Creates a matrix from sequence of sequences `s`
+    let inline ofSeqSeq (s:seq<seq<'T>>):Matrix<'T> = s |> array2D |> Matrix
+    /// Converts matrix `m` to a sequence of sequences
+    let inline toSeqSeq (m:Matrix<'T>):seq<seq<'T>> = m.ToArray() |> Array.map Seq.ofArray |> Seq.ofArray
+    /// Creates a matrix with `m` rows from the one dimensional sequence `s`, filling columns from left to right and rows from top to bottom. The number of columns will be deduced from `m` and the length of the sequence `s`. The length of `s` must be an integer multiple of `m`.
+    let inline ofSeq (m:int) (s:seq<'T>):Matrix<'T> = 
+        let n = Seq.length s / m
+        Array2D.init m n (fun i j -> Seq.nth (i * n + j) s) |> Matrix
+    /// Converts matrix `m` to a one dimensional sequence, scanning columns from left to right and rows from top to bottom
     let inline toSeq (m:Matrix<'T>):seq<'T> = m.ToSeq()
+    /// Creates a matrix with `m` rows from the one dimensional array `a`, filling columns from left to right and rows from top to bottom. The number of columns will be deduced from `m` and the length of the array `a`. The length of `a` must be an integer multiple of `m`.
+    let inline ofArray (m:int) (a:'T[]):Matrix<'T> = ofSeq m a
+    /// Converts matrix `m` to a one dimensional array, scanning columns from left to right and rows from top to bottom
+    let inline toArray (m:Matrix<'T>):'T[] = m |> toSeq |> Array.ofSeq
+    /// Creates a matrix with `m` rows from the vector `v`, filling columns from left to right and rows from top to bottom. The number of columns will be deduced from `m` and the length of the vector `v`. The length of `v` must be an integer multiple of `m`.
+    let inline ofVector (m:int) (v:Vector<'T>):Matrix<'T> = v |> Vector.toSeq |> ofSeq m
+    /// Converts matrix `m` to a vector, scanning columns from left to right and rows from top to bottom
+    let inline toVector (m:Matrix<'T>):Vector<'T> = m |> toSeq |> Vector.ofSeq
     /// Returns the number of columns in matrix `m`. This is the same with `Matrix.length2`.
     let inline cols (m:Matrix<'T>):int = m.Cols
     /// Creates a copy of Matrix `m`

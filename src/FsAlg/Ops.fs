@@ -34,6 +34,6 @@ module Ops =
     /// Converts array, list, or sequence `v` into a Vector, first passing the elements through a conversion function `f`
     let inline vectorBy (f:'T->'U) (v:seq<'T>):Vector<'U> = Vector.map f (Vector.ofSeq v)
     /// Converts 2d array `m` into a Matrix
-    let inline matrix (m:seq<seq<'T>>):Matrix<'T> = Matrix.ofSeq m
+    let inline matrix (m:seq<seq<'T>>):Matrix<'T> = Matrix.ofSeqSeq m
     /// Converts 2d array `m` into a Matrix, first passing the elements through a conversion function `f`
-    let inline matrixBy (f:'T->'U) (m:seq<seq<'T>>):Matrix<'U> = Matrix.map f (Matrix.ofSeq m)
+    let inline matrixBy (f:'T->'U) (m:seq<seq<'T>>):Matrix<'U> = Matrix.map f (Matrix.ofSeqSeq m)

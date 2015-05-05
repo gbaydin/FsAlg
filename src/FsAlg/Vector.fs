@@ -124,8 +124,17 @@ type Vector<'T when 'T : (static member Zero : 'T)
         match v with
         | Vector vv -> let n = v.GetL2Norm() in Vector (Array.map (fun x -> x / n) vv)
         | ZeroVector z -> ZeroVector z
+    /// Returns a sequence of vectors that are obtained by splitting this vector into subvectors whose lengths are given in sequence `n`
+    member inline v.Split(n:seq<int>) =
+        match v with
+        | Vector v ->
+            let mutable i = 0
+            seq {for j in n do
+                    yield Array.sub v i j |> Vector
+                    i <- i + j}
+        | ZeroVector _ -> seq {yield v}
     /// Returns a sequence of vectors that are obtained by splitting this vector into `n` subvectors of equal length. The length of this vector must be an integer multiple of `n`, otherwise ArgumentException is raised.
-    member inline v.Split(n:int) =
+    member inline v.SplitEqual(n:int) =
         match v with
         | Vector v ->
             if n <= 0 then invalidArg "" "For splitting this vector, n should be a positive integer."
@@ -273,10 +282,12 @@ type Vector<'T when 'T : (static member Zero : 'T)
 /// Operations on Vector type. (Implementing functionality similar to Microsoft.FSharp.Collections.Array)
 [<RequireQualifiedAccess>]
 module Vector =
-    /// Creates a vector from sequence `s`
-    let inline ofSeq (s:seq<'T>):Vector<'T> = Vector (Array.ofSeq s)
+    /// Createsa vector from array `v`
+    let inline ofArray (v:'T[]) = Vector v
     /// Converts vector `v` to an array
     let inline toArray (v:Vector<'T>):'T[] = v.ToArray()
+    /// Creates a vector from sequence `s`
+    let inline ofSeq (s:seq<'T>):Vector<'T> = Vector (Array.ofSeq s)
     /// Returns vector `v` as a sequence
     let inline toSeq (v:Vector<'T>):seq<'T> = v.ToSeq()
     /// Creates a vector that contains the elements of vector `v1` followed by the elements of vector `v2`
@@ -379,8 +390,10 @@ module Vector =
     let inline scanBack (f:'T->'S->'S) (s:'S) (v:Vector<'T>):Vector<'S> = Array.scanBack f (v |> toArray) s |> ofSeq
     /// Sets the element of vector`v` with index `i` to value `a`
     let inline set (v:Vector<'T>) (i:int) (a:'T):unit = v.[i] <- a
+    /// Returns a sequence of vectors that are obtained by splitting vector `v` into subvectors whose lengths are given in the sequence `n`
+    let inline split (n:seq<int>) (v:Vector<'T>):seq<Vector<'T>> = v.Split(n)
     /// Returns a sequence of vectors that are obtained by splitting vector `v` into `n` subvectors of equal length. The length of vector `v` must be an integer multiple of `n`, otherwise ArgumentException is raised.
-    let inline split (n:int) (v:Vector<'T>):seq<Vector<'T>> = v.Split(n)
+    let inline splitEqual (n:int) (v:Vector<'T>):seq<Vector<'T>> = v.SplitEqual(n)
     /// Creates a vector with `n` elements, where the `i`-th element is 1 and the rest of the elements are 0
     let inline standardBasis (n:int) (i:int):Vector<'T> = createBasis n i LanguagePrimitives.GenericOne
     /// Creates a new vector that contains the given subrange of vector `v`, specified by start index `s` and count `c`
