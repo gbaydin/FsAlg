@@ -112,12 +112,14 @@ Splitting and Concatenating
 ---------------------------   
 *)
 
-let ss = Vector.split 3 (vector [1.; 2.; 3.; 4.; 5.; 6.]) // Split into 3 vectors of equal length
-let cc = Vector.concat ss // Concatenate vectors into one
+let ss1 = Vector.splitEqual 3 (vector [1.; 2.; 3.; 4.; 5.; 6.]) // Split into 3 vectors of equal length
+let ss2 = Vector.split [2; 4] (vector [1.; 2.; 3.; 4.; 5.; 6.]) // Split into vectors of given lengths
+let cc1 = Vector.concat ss1 // Concatenate vectors into one
 
 (*** hide, define-output: o5 ***)
-printf "val ss : seq<Vector<float>>
-val cc : Vector<float> = Vector [|1.0; 2.0; 3.0; 4.0; 5.0; 6.0|]"
+printf "val ss1 : seq<Vector<float>>
+val ss2 : seq<Vector<float>>
+val cc1 : Vector<float> = Vector [|1.0; 2.0; 3.0; 4.0; 5.0; 6.0|]"
 (*** include-output: o5 ***)
 
 (**

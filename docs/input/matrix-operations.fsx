@@ -215,12 +215,16 @@ Conversions
 -----------
 *)
 
-let m18 = Matrix.ofSeq [[1.; 2.]; [3.; 4.]]  // Convert sequence of sequences to matrix
-let m19 = matrix [[1.; 2.]; [3.; 4.]]        // Same with above, supprots lists,
+let m18 = Matrix.ofSeqSeq [[1.; 2.]; [3.; 4.]]  // Convert sequence of sequences to matrix
+let m19 = matrix [[1.; 2.]; [3.; 4.]]        // Same with above, supports lists,
 let m20 = matrix [|[|1.; 2.|]; [|3.; 4.|]|]  // arrays,
 let m21 = matrix (seq {yield seq {yield 1.}}) // and sequences.
-let aa1 = Matrix.toArray m1   // Convert matrix to jagged array
-let aa2 = Matrix.toArray2D m1 // Convert matrix to 2d array
+let aa1 = Matrix.toArrayArray m1   // Convert matrix to jagged array
+let aa2 = Matrix.toArray2D m1   // Convert matrix to 2d array
+let aa3 = Matrix.toArray m1     // Convert matrix to 1d array
+let ma3 = Matrix.ofArray 2 aa3  // Convert 1d array to matrix
+let vv1 = Matrix.toVector m1    // Convert matrix to vector
+let mv1 = Matrix.ofVector 2 vv1 // Convert vector to matrix
 
 (*** hide, define-output: o7 ***)
 printf "val m18 : Matrix<float> = Matrix [[1.0; 2.0]
@@ -230,9 +234,15 @@ val m19 : Matrix<float> = Matrix [[1.0; 2.0]
 val m20 : Matrix<float> = Matrix [[1.0; 2.0]
                                   [3.0; 4.0]]
 val m21 : Matrix<float> = Matrix [[1.0]]
-val aa1 : float [] [] = [|[|1.0; 2.0|]; [|3.0; 4.0|]|]
-val aa2 : float [,] = [[1.0; 2.0]
-                       [3.0; 4.0]]"
+val aa1 : float [] [] = [|[|1.0; 1.0|]; [|1.0; 1.0|]|]
+val aa2 : float [,] = [[1.0; 1.0]
+                       [1.0; 1.0]]
+val aa3 : float [] = [|1.0; 1.0; 1.0; 1.0|]
+val ma3 : Matrix<float> = Matrix [[1.0; 1.0]
+                                  [1.0; 1.0]]
+val vv1 : Vector<float> = Vector [|1.0; 1.0; 1.0; 1.0|]
+val mv1 : Matrix<float> = Matrix [[1.0; 1.0]
+                                  [1.0; 1.0]]"
 (*** include-output: o7 ***)
 
 (**
