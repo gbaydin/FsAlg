@@ -379,7 +379,7 @@ module Matrix =
     /// Creates a matrix with `m` rows from the one dimensional sequence `s`, filling columns from left to right and rows from top to bottom. The number of columns will be deduced from `m` and the length of the sequence `s`. The length of `s` must be an integer multiple of `m`.
     let inline ofSeq (m:int) (s:seq<'T>):Matrix<'T> = 
         let n = Seq.length s / m
-        Array2D.init m n (fun i j -> Seq.nth (i * n + j) s) |> Matrix
+        Array2D.init m n (fun i j -> Seq.item (i * n + j) s) |> Matrix
     /// Converts matrix `m` to a one dimensional sequence, scanning columns from left to right and rows from top to bottom
     let inline toSeq (m:Matrix<'T>):seq<'T> = m.ToSeq()
     /// Creates a matrix with `m` rows from the one dimensional array `a`, filling columns from left to right and rows from top to bottom. The number of columns will be deduced from `m` and the length of the array `a`. The length of `a` must be an integer multiple of `m`.
