@@ -128,10 +128,10 @@ type Vector<'T when 'T : (static member Zero : 'T)
     member inline v.Split(n:seq<int>) =
         match v with
         | Vector v ->
-            let mutable i = 0
+            let i = ref 0
             seq {for j in n do
-                    yield Array.sub v i j |> Vector
-                    i <- i + j}
+                    yield Array.sub v !i j |> Vector
+                    i := !i + j}
         | ZeroVector _ -> seq {yield v}
     /// Returns a sequence of vectors that are obtained by splitting this vector into `n` subvectors of equal length. The length of this vector must be an integer multiple of `n`, otherwise ArgumentException is raised.
     member inline v.SplitEqual(n:int) =
