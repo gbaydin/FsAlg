@@ -22,8 +22,8 @@ let m2 = Matrix.create 2 2 1.
 let m3 = Matrix.init 2 2 (fun i j -> exp (float (i + j)))
 
 (*** hide, define-output: o ***)
-printf "val m1 : Matrix<float> = Matrix [[1.0; 2.0]
-                                 [3.0; 4.0]]
+printf "val m1 : Matrix<float> = Matrix [[1.0; 1.0]
+                                 [1.0; 1.0]]
 val m2 : Matrix<float> = Matrix [[1.0; 1.0]
                                  [1.0; 1.0]]
 val m3 : Matrix<float> = Matrix [[1.0; 2.718281828]
@@ -180,14 +180,32 @@ val q : Matrix<float> = Matrix [[0.316227766; 0.9486832981]
 (*** include-output: o5 ***)
 
 (**
-Accessing Elements
-------------------
+Accessing Elements & Conversions
+--------------------------------
 *)
 
 let el1 = m1.[0, 0]         // Element at 0, 0
 let el2 = Matrix.get m1 1 1 // Element at 1, 1
 let sl1 = m1.[0..1, 1..]    // Slice, between rows 0 and 1, columns 1 and beyond
 let sl2 = m1.[*, 0..1]      // Slice, all rows, between columns 0 and 1
+let sl3 = m1.[0, *]         // Return row 0 as a vector
+let sl4 = Matrix.row 0 m1   // Return row 0 as a vector
+let sl5 = m1.[*, 1]         // Return column 1 as a vector
+let sl6 = Matrix.col 1 m1   // Return column 1 as a vector
+let sl7 = Matrix.toRows m1  // Return rows as a sequence of vectors
+let m18 = Matrix.ofRows [vector [1.;2.]; vector [3.;4.]] // Create matrix from row vectors
+let sl8 = Matrix.toCols m1  // Return columns as a sequence of vectors
+let m19 = Matrix.ofCols [vector [1.;2.]; vector [3.;4.]] // Create matrix from column vectors
+let m20 = Matrix.ofSeqSeq [[1.; 2.]; [3.; 4.]]  // Convert sequence of sequences to matrix
+let m21 = matrix [[1.; 2.]; [3.; 4.]]        // Same with above, supports lists,
+let m22 = matrix [|[|1.; 2.|]; [|3.; 4.|]|]  // arrays,
+let m23 = matrix (seq {yield seq {yield 1.}}) // and sequences.
+let aa1 = Matrix.toArrayArray m1   // Convert matrix to jagged array
+let aa2 = Matrix.toArray2D m1   // Convert matrix to 2d array
+let aa3 = Matrix.toArray m1     // Convert matrix to 1d array, scanning left to right, top to bottom
+let ma3 = Matrix.ofArray 2 aa3  // Convert 1d array to matrix, populating two rows
+let vv1 = Matrix.toVector m1    // Convert matrix to vector, scanning left to right, top to bottom
+let mv1 = Matrix.ofVector 2 vv1 // Convert vector to matrix, populating two rows
 
 (*** hide, define-output: o6 ***)
 printf "val el1 : float = 1.0
@@ -195,8 +213,35 @@ val el2 : float = 4.0
 val sl1 : Matrix<float> = Matrix [[2.0]
                                   [4.0]]
 val sl2 : Matrix<float> = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val sl3 : Vector<float> = Vector [|1.0; 2.0|]
+val sl4 : Vector<float> = Vector [|1.0; 2.0|]
+val sl5 : Vector<float> = Vector [|2.0; 4.0|]
+val sl6 : Vector<float> = Vector [|2.0; 4.0|]
+val sl7 : seq<Vector<float>>
+val m18 : Matrix<float> = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val sl8 : seq<Vector<float>>
+val m19 : Matrix<float> = Matrix [[1.0; 3.0]
+                                  [2.0; 4.0]]
+val m20 : Matrix<float> = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val m21 : Matrix<float> = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val m22 : Matrix<float> = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val m23 : Matrix<float> = Matrix [[1.0]]
+val aa1 : float [] [] = [|[|1.0; 2.0|]; [|3.0; 4.0|]|]
+val aa2 : float [,] = [[1.0; 1.0]
+                       [1.0; 1.0]]
+val aa3 : float [] = [|1.0; 2.0; 3.0; 4.0|]
+val ma3 : Matrix<float> = Matrix [[1.0; 2.0]
+                                  [3.0; 4.0]]
+val vv1 : Vector<float> = Vector [|1.0; 2.0; 3.0; 4.0|]
+val mv1 : Matrix<float> = Matrix [[1.0; 2.0]
                                   [3.0; 4.0]]"
 (*** include-output: o6 ***)
+
 
 (**
 Mutating/Replacing Elements
@@ -211,41 +256,6 @@ Matrix.replacei2 (fun i j x y -> x - y + float (i * j)) m1 m2 // Replace m1 in p
 Matrix.replaceWith m1 m2 // Replace elements of m1 with m2, mutating in place
 
 (**
-Conversions
------------
-*)
-
-let m18 = Matrix.ofSeqSeq [[1.; 2.]; [3.; 4.]]  // Convert sequence of sequences to matrix
-let m19 = matrix [[1.; 2.]; [3.; 4.]]        // Same with above, supports lists,
-let m20 = matrix [|[|1.; 2.|]; [|3.; 4.|]|]  // arrays,
-let m21 = matrix (seq {yield seq {yield 1.}}) // and sequences.
-let aa1 = Matrix.toArrayArray m1   // Convert matrix to jagged array
-let aa2 = Matrix.toArray2D m1   // Convert matrix to 2d array
-let aa3 = Matrix.toArray m1     // Convert matrix to 1d array
-let ma3 = Matrix.ofArray 2 aa3  // Convert 1d array to matrix
-let vv1 = Matrix.toVector m1    // Convert matrix to vector
-let mv1 = Matrix.ofVector 2 vv1 // Convert vector to matrix
-
-(*** hide, define-output: o7 ***)
-printf "val m18 : Matrix<float> = Matrix [[1.0; 2.0]
-                                  [3.0; 4.0]]
-val m19 : Matrix<float> = Matrix [[1.0; 2.0]
-                                  [3.0; 4.0]]
-val m20 : Matrix<float> = Matrix [[1.0; 2.0]
-                                  [3.0; 4.0]]
-val m21 : Matrix<float> = Matrix [[1.0]]
-val aa1 : float [] [] = [|[|1.0; 1.0|]; [|1.0; 1.0|]|]
-val aa2 : float [,] = [[1.0; 1.0]
-                       [1.0; 1.0]]
-val aa3 : float [] = [|1.0; 1.0; 1.0; 1.0|]
-val ma3 : Matrix<float> = Matrix [[1.0; 1.0]
-                                  [1.0; 1.0]]
-val vv1 : Vector<float> = Vector [|1.0; 1.0; 1.0; 1.0|]
-val mv1 : Matrix<float> = Matrix [[1.0; 1.0]
-                                  [1.0; 1.0]]"
-(*** include-output: o7 ***)
-
-(**
 Mathematica and MATLAB Strings
 ------------------------------
 You can generate string representations of matrices that you can copy and paste into Mathematica notebooks or MATLAB.   
@@ -254,10 +264,10 @@ You can generate string representations of matrices that you can copy and paste 
 let s1 = m1.ToMathematicaString()
 let s2 = m2.ToMatlabString()
 
-(*** hide, define-output: o8 ***)
+(*** hide, define-output: o7 ***)
 printf "val s1 : string = \"{{1.00, 2.00}, {3.00, 4.00}}\"
 val s2 : string = \"[1.00 1.00; 1.00 1.00]\""
-(*** include-output: o8 ***)
+(*** include-output: o7 ***)
 
 (**
 Other Operations
@@ -267,11 +277,11 @@ The following are just a selection of other operations. Please refer to [API Ref
 
 let l1  = Matrix.rows m1 // Number of rows
 let l2  = Matrix.cols m1 // Number of columns
-let m22 = Matrix.map (fun x -> sin x) m1 // Map function to matrix
+let m24 = Matrix.map (fun x -> sin x) m1 // Map function to matrix
 
-(*** hide, define-output: o9 ***)
+(*** hide, define-output: o8 ***)
 printf "val l1 : int = 2
 val l2 : int = 2
-val m22 : Matrix<float> = Matrix [[0.8414709848; 0.9092974268]
-                                  [0.1411200081; -0.7568024953]]"
-(*** include-output: o9 ***)
+val m24 : Matrix<float> = Matrix [[0.8414709848; 0.8414709848]
+                                  [0.8414709848; 0.8414709848]]"
+(*** include-output: o8 ***)

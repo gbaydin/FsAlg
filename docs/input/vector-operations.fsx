@@ -80,20 +80,32 @@ val n4 : float = 3.301927249"
 (*** include-output: o3 ***)
 
 (**
-Accessing Elements
-------------------   
+Accessing Elements & Conversions
+--------------------------------
 *)
 
 let e1 = v1.[0]          // 1st element of v1
 let e2 = Vector.get v1 1 // 2nd element of v1
 let e3 = v1.[..1]        // Slice, until 2nd element
 let e4 = v1.[1..2]       // Slice, between 2nd and 3rd elements
+let v20 = Vector.ofSeq [1.; 2.; 3.] // Convert sequence to vector
+let v21 = vector [1.; 2.; 3.]       // Same with above, supports lists,
+let v22 = vector [|1.; 2.; 3.|]     // arrays,
+let v23 = vector (seq {yield 1.})   // and sequences.
+let aa1 = Vector.toArray v1 // Convert vector to array
+let sq1 = Vector.toSeq v1   // Convert vector to sequence
 
 (*** hide, define-output: o4 ***)
 printf "val e1 : float = 1.0
 val e2 : float = 2.0
 val e3 : Vector<float> = Vector [|1.0; 2.0|]
-val e4 : Vector<float> = Vector [|2.0; 3.0|]"
+val e4 : Vector<float> = Vector [|2.0; 3.0|]
+val v20 : Vector<float> = Vector [|1.0; 2.0; 3.0|]
+val v21 : Vector<float> = Vector [|1.0; 2.0; 3.0|]
+val v22 : Vector<float> = Vector [|1.0; 2.0; 3.0|]
+val v23 : Vector<float> = Vector [|1.0|]
+val aa1 : float [] = [|1.0; 2.0; 3.0|]
+val sq1 : seq<float>"
 (*** include-output: o4 ***)
 
 (**
@@ -123,27 +135,6 @@ val cc1 : Vector<float> = Vector [|1.0; 2.0; 3.0; 4.0; 5.0; 6.0|]"
 (*** include-output: o5 ***)
 
 (**
-Conversions
------------   
-*)
-
-let v20 = Vector.ofSeq [1.; 2.; 3.] // Convert sequence to vector
-let v21 = vector [1.; 2.; 3.]       // Same with above, supports lists,
-let v22 = vector [|1.; 2.; 3.|]     // arrays,
-let v23 = vector (seq {yield 1.})   // and sequences.
-let aa1 = Vector.toArray v1 // Convert vector to array
-let sq1 = Vector.toSeq v1   // Convert vector to sequence
-
-(*** hide, define-output: o6 ***)
-printf "val v20 : Vector<float> = Vector [|1.0; 2.0; 3.0|]
-val v21 : Vector<float> = Vector [|1.0; 2.0; 3.0|]
-val v22 : Vector<float> = Vector [|1.0; 2.0; 3.0|]
-val v23 : Vector<float> = Vector [|1.0|]
-val aa1 : float [] = [|1.0; 2.0; 3.0|]
-val sq1 : seq<float>"
-(*** include-output: o6 ***)
-
-(**
 Mathematica and MATLAB Strings
 ------------------------------
 
@@ -153,10 +144,10 @@ You can generate string representations of vectors that you can copy and paste i
 let s1 = v1.ToMathematicaString()
 let s2 = v1.ToMatlabString()
 
-(*** hide, define-output: o7 ***)
+(*** hide, define-output: o6 ***)
 printf "val s1 : string = \"{1.00, 2.00, 3.00}\"
 val s2 : string = \"[1.00 2.00 3.00]\""
-(*** include-output: o7 ***)
+(*** include-output: o6 ***)
 
 (**
 Other Operations
@@ -172,7 +163,7 @@ let v17 = Vector.unitVector v1 // Get unit vector codirectional with v1
 let v18 = Vector.map (fun x -> sin x) v1 // Map function to vector
 let v19 = Vector.fold (fun s x -> s + sin x) 0. v1 // Fold a vector
 
-(*** hide, define-output: o8 ***)
+(*** hide, define-output: o7 ***)
 printf "val len : int = 3
 val min : float = 1.0
 val max : float = 3.0
@@ -180,4 +171,4 @@ val sum : float = 6.0
 val v17 : Vector<float> = Vector [|0.2672612419; 0.5345224838; 0.8017837257|]
 val v18 : Vector<float> = Vector [|0.8414709848; 0.9092974268; 0.1411200081|]
 val v19 : float = 1.89188842"
-(*** include-output: o8 ***)
+(*** include-output: o7 ***)

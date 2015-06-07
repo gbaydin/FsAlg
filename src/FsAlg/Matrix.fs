@@ -390,6 +390,8 @@ module Matrix =
     let inline ofVector (m:int) (v:Vector<'T>):Matrix<'T> = v |> Vector.toSeq |> ofSeq m
     /// Converts matrix `m` to a vector, scanning columns from left to right and rows from top to bottom
     let inline toVector (m:Matrix<'T>):Vector<'T> = m |> toSeq |> Vector.ofSeq
+    /// Returns the j-th column of matrix `m` as a vector
+    let inline col (j:int) (m:Matrix<'T>):Vector<'T> = m.[*,j]
     /// Returns the number of columns in matrix `m`. This is the same with `Matrix.length2`.
     let inline cols (m:Matrix<'T>):int = m.Cols
     /// Creates a copy of Matrix `m`
@@ -467,6 +469,8 @@ module Matrix =
     let inline replaceWith (m1:Matrix<'T>) (m2:Matrix<'T>) =
         if (m1.Rows <> m2.Rows) || (m1.Cols <> m2.Cols) then invalidArg "" "The matrices should have the same dimensions."
         Array2D.blit (m2 |> toArray2D) 0 0 (m1 |> toArray2D) 0 0 m1.Rows m1.Cols
+    /// Returns the i-th row of matrix `m` as a vector
+    let inline row (i:int) (m:Matrix<'T>):Vector<'T> = m.[i,*]
     /// Returns the number of rows in matrix `m`. This is the same with `Matrix.length1`.
     let inline rows (m:Matrix<'T>):int = m.Rows
     /// Sets the entry of matrix `m` with indices `i` and `j` to value `a`
@@ -481,3 +485,11 @@ module Matrix =
     let inline trace (m:Matrix<'T>):'T = m.GetTrace()
     /// Gets the transpose of matrix `m`
     let inline transpose (m:Matrix<'T>):Matrix<'T> = m.GetTranspose()
+    /// Constructs a matrix out of a sequence of row vectors `v`. The row vectors should be of equal length.
+    let inline ofRows (v:seq<Vector<'T>>):Matrix<'T> = v |> Seq.map Vector.toSeq |> ofSeqSeq
+    /// Returns the rows of matrix `m` as a sequence of vectors
+    let inline toRows (m:Matrix<'T>):seq<Vector<'T>> = Seq.init m.Rows (fun i -> m.[i,*])
+    /// Constructs a matrix out of a sequence of column vectors `v`. The column vectors should be of equal length.
+    let inline ofCols (v:seq<Vector<'T>>):Matrix<'T> = v |> ofRows |> transpose
+    /// Returns the columns of matrix `m` as a sequence of vectors
+    let inline toCols (m:Matrix<'T>):seq<Vector<'T>> = m |> transpose |> toRows
