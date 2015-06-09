@@ -493,3 +493,39 @@ module Matrix =
     let inline ofCols (v:seq<Vector<'T>>):Matrix<'T> = v |> ofRows |> transpose
     /// Returns the columns of matrix `m` as a sequence of vectors
     let inline toCols (m:Matrix<'T>):seq<Vector<'T>> = m |> transpose |> toRows
+    /// Returns a matrix where vector `v` is appended as a new row to matrix `m`
+    let inline appendRow (v:Vector<'T>) (m:Matrix<'T>):Matrix<'T> =
+        if m.Cols <> v.Length then invalidArg "" "The length of the appended row should be the same with the number of the columns in the matrix."
+        let mm = m |> toArray2D
+        let ret = Array2D.zeroCreate (m.Rows + 1) m.Cols
+        Array2D.blit mm 0 0 ret 0 0 m.Rows m.Cols
+        for i = 0 to m.Cols - 1 do
+            ret.[m.Rows, i] <- v.[i]
+        Matrix ret
+    /// Returns a matrix where vector `v` is appended as a new column to matrix `m`
+    let inline appendColumn (v:Vector<'T>) (m:Matrix<'T>):Matrix<'T> =
+        if m.Rows <> v.Length then invalidArg "" "The length of the appended column should be the same with the number of rows in the matrix."
+        let mm = m |> toArray2D
+        let ret = Array2D.zeroCreate m.Rows (m.Cols + 1)
+        Array2D.blit mm 0 0 ret 0 0 m.Rows m.Cols
+        for i = 0 to m.Rows - 1 do
+            ret.[i, m.Cols] <- v.[i]
+        Matrix ret
+    /// Returns a matrix where vector `v` is appended as a new row to matrix `m`
+    let inline prependRow (v:Vector<'T>) (m:Matrix<'T>):Matrix<'T> =
+        if m.Cols <> v.Length then invalidArg "" "The length of the prepended row should be the same with the number of the columns in the matrix."
+        let mm = m |> toArray2D
+        let ret = Array2D.zeroCreate (m.Rows + 1) m.Cols
+        Array2D.blit mm 0 0 ret 1 0 m.Rows m.Cols
+        for i = 0 to m.Cols - 1 do
+            ret.[0, i] <- v.[i]
+        Matrix ret
+    /// Returns a matrix where vector `v` is prepended as a new column to matrix `m`
+    let inline prependColumn (v:Vector<'T>) (m:Matrix<'T>):Matrix<'T> =
+        if m.Rows <> v.Length then invalidArg "" "The length of the prepended column should be the same with the number of rows in the matrix."
+        let mm = m |> toArray2D
+        let ret = Array2D.zeroCreate m.Rows (m.Cols + 1)
+        Array2D.blit mm 0 0 ret 0 1 m.Rows m.Cols
+        for i = 0 to m.Rows - 1 do
+            ret.[i, 0] <- v.[i]
+        Matrix ret
