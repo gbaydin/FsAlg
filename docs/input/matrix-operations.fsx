@@ -255,9 +255,9 @@ Matrix.replace2 (fun x y -> x - y) m1 m2 // Replace m1 in place, using a functio
 Matrix.replacei2 (fun i j x y -> x - y + float (i * j)) m1 m2 // Replace m1 in place, with index
 Matrix.replaceWith m1 m2  // Replace elements of m1 with m2, mutating in place
 Matrix.appendRow v m1     // Append a vector to a matrix as a new row
+Matrix.appendCol v m1  // Append a vector to a matrix as a new column
 Matrix.prependRow v m1    // Prepend a vector to a matrix as a new row
-Matrix.appendColumn v m1  // Append a vector to a matrix as a new column
-Matrix.prependColumn v m1 // Prepend a vector to a matrix as a new column
+Matrix.prependCol v m1 // Prepend a vector to a matrix as a new column
 
 (**
 Mathematica and MATLAB Strings
