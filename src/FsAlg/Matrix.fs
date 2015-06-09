@@ -417,8 +417,6 @@ module Matrix =
     let inline get (m:Matrix<'T>) (i:int) (j:int):'T = m.[i, j]
     /// Creates a matrix with `m` rows, `n` columns and a generator function `f` to compute the entries
     let inline init (m:int) (n:int) (f:int->int->'T):Matrix<'T> = Matrix (Array2D.init m n f)
-    /// Creates a matrix with `m` rows and a generator function `f` that gives each row as a an array
-    let inline initRows (m:int) (f:int->'T[]):Matrix<'T> = Matrix (array2D (Array.init m f))
     /// Creates a square matrix with `m` rows and columns and a generator function `f` to compute the elements. Function `f` is used only for populating the diagonal and the upper triangular part of the matrix, the lower triangular part will be the reflection.
     let inline initSymmetric (m:int) (f:int->int->'T):Matrix<'T> =
         if m = 0 then 
@@ -529,3 +527,7 @@ module Matrix =
         for i = 0 to m.Rows - 1 do
             ret.[i, 0] <- v.[i]
         Matrix ret
+    /// Creates a matrix with `n` columns and a generator function `f` that gives each column as a vector
+    let inline initCols (n:int) (f:int->Vector<'T>):Matrix<'T> = Matrix (array2D (Array.init n (f >> Vector.toArray))) |> transpose
+    /// Creates a matrix with `m` rows and a generator function `f` that gives each row as a a vector
+    let inline initRows (m:int) (f:int->Vector<'T>):Matrix<'T> = Matrix (array2D (Array.init m (f >> Vector.toArray)))
