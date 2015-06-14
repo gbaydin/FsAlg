@@ -77,8 +77,10 @@ type Matrix<'T when 'T : (static member Zero : 'T)
         | Matrix mm ->
             let rowStart = defaultArg rowStart 0
             let rowFinish = defaultArg rowFinish (m.Rows - 1)
+            if rowStart > rowFinish then invalidArg "" "Given row slice bounds are invalid."
             let colStart = defaultArg colStart 0
             let colFinish = defaultArg colFinish (m.Cols - 1)
+            if colStart > colFinish then invalidArg "" "Given column slice bounds are invalid."
             Matrix mm.[rowStart..rowFinish, colStart..colFinish]
         | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
     /// Gets a row subvector of this matrix with the given row index `row` and column bounds `colStart` and `colFinish`
@@ -87,6 +89,7 @@ type Matrix<'T when 'T : (static member Zero : 'T)
         | Matrix mm ->
             let colStart = defaultArg colStart 0
             let colFinish = defaultArg colFinish (m.Cols - 1)
+            if colStart > colFinish then invalidArg "" "Given column slice bounds are invalid."
             Vector mm.[row, colStart..colFinish]
         | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
     /// Gets a column subvector of this matrix with the given column index `col` and row bounds `rowStart` and `rowFinish`
@@ -95,6 +98,7 @@ type Matrix<'T when 'T : (static member Zero : 'T)
         | Matrix mm ->
             let rowStart = defaultArg rowStart 0
             let rowFinish = defaultArg rowFinish (m.Rows - 1)
+            if rowStart > rowFinish then invalidArg "" "Given row slice bounds are invalid."
             Vector mm.[rowStart..rowFinish, col]
         | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
     /// Gets a string representation of this matrix that can be pasted into a Mathematica notebook

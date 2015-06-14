@@ -67,6 +67,7 @@ type Vector<'T when 'T : (static member Zero : 'T)
         | Vector v ->
             let l = defaultArg lower 0
             let u = defaultArg upper (v.Length - 1)
+            if l > u then invalidArg "" "Given slice bounds are invalid."
             Vector v.[l..u]
         | ZeroVector _ -> invalidArg "" "Cannot get slice of a ZeroVector."
     /// Gets the first element of this vector
