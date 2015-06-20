@@ -83,23 +83,23 @@ type Matrix<'T when 'T : (static member Zero : 'T)
             if colStart > colFinish then invalidArg "" "Given column slice bounds are invalid."
             Matrix mm.[rowStart..rowFinish, colStart..colFinish]
         | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
-    /// Gets a row subvector of this matrix with the given row index `row` and column bounds `colStart` and `colFinish`
+    /// Gets a row of this matrix with the given row index `row` and column bounds `colStart` and `colFinish`
     member inline m.GetSlice(row, colStart, colFinish) =
         match m with
         | Matrix mm ->
             let colStart = defaultArg colStart 0
             let colFinish = defaultArg colFinish (m.Cols - 1)
             if colStart > colFinish then invalidArg "" "Given column slice bounds are invalid."
-            Vector mm.[row, colStart..colFinish]
+            [mm.[row, colStart..colFinish]] |> array2D |> Matrix
         | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
-    /// Gets a column subvector of this matrix with the given column index `col` and row bounds `rowStart` and `rowFinish`
+    /// Gets a column of this matrix with the given column index `col` and row bounds `rowStart` and `rowFinish`
     member inline m.GetSlice(rowStart, rowFinish, col) =
         match m with
         | Matrix mm ->
             let rowStart = defaultArg rowStart 0
             let rowFinish = defaultArg rowFinish (m.Rows - 1)
             if rowStart > rowFinish then invalidArg "" "Given row slice bounds are invalid."
-            Vector mm.[rowStart..rowFinish, col]
+            [mm.[rowStart..rowFinish, col]] |> array2D |> transpose |> Matrix
         | ZeroMatrix _ -> invalidArg "" "Cannot get slice of a ZeroMatrix."
     /// Gets a string representation of this matrix that can be pasted into a Mathematica notebook
     member inline m.ToMathematicaString() =
@@ -347,7 +347,7 @@ type Matrix<'T when 'T : (static member Zero : 'T)
             let q = Array.create m.Rows Matrix.Zero
             for k = 0 to kmax do
                 z <- Matrix (minor (z.ToArray2D()) k)
-                let x = z.[*, k]
+                let x = z.[*, k].ToSeq() |> Array.ofSeq |> Vector
                 let mutable a = x.GetL2Norm()
                 if mm.[k, k] > LanguagePrimitives.GenericZero then a <- -a
                 let e = (x + Vector.createBasis m.Rows k a).GetUnitVector()
@@ -394,8 +394,8 @@ module Matrix =
     let inline ofVector (m:int) (v:Vector<'T>):Matrix<'T> = v |> Vector.toSeq |> ofSeq m
     /// Converts matrix `m` to a vector, scanning columns from left to right and rows from top to bottom
     let inline toVector (m:Matrix<'T>):Vector<'T> = m |> toSeq |> Vector.ofSeq
-    /// Returns the j-th column of matrix `m` as a vector
-    let inline col (j:int) (m:Matrix<'T>):Vector<'T> = m.[*,j]
+    /// Returns the j-th column of matrix `m`
+    let inline col (j:int) (m:Matrix<'T>):Matrix<'T> = m.[*,j]
     /// Returns the number of columns in matrix `m`. This is the same with `Matrix.length2`.
     let inline cols (m:Matrix<'T>):int = m.Cols
     /// Creates a copy of Matrix `m`
@@ -471,8 +471,8 @@ module Matrix =
     let inline replaceWith (m1:Matrix<'T>) (m2:Matrix<'T>) =
         if (m1.Rows <> m2.Rows) || (m1.Cols <> m2.Cols) then invalidArg "" "The matrices should have the same dimensions."
         Array2D.blit (m2 |> toArray2D) 0 0 (m1 |> toArray2D) 0 0 m1.Rows m1.Cols
-    /// Returns the i-th row of matrix `m` as a vector
-    let inline row (i:int) (m:Matrix<'T>):Vector<'T> = m.[i,*]
+    /// Returns the i-th row of matrix `m`
+    let inline row (i:int) (m:Matrix<'T>):Matrix<'T> = m.[i,*]
     /// Returns the number of rows in matrix `m`. This is the same with `Matrix.length1`.
     let inline rows (m:Matrix<'T>):int = m.Rows
     /// Sets the entry of matrix `m` with indices `i` and `j` to value `a`
@@ -489,12 +489,12 @@ module Matrix =
     let inline transpose (m:Matrix<'T>):Matrix<'T> = m.GetTranspose()
     /// Constructs a matrix out of a sequence of row vectors `v`. The row vectors should be of equal length.
     let inline ofRows (v:seq<Vector<'T>>):Matrix<'T> = v |> Seq.map Vector.toSeq |> ofSeqSeq
-    /// Returns the rows of matrix `m` as a sequence of vectors
-    let inline toRows (m:Matrix<'T>):seq<Vector<'T>> = Seq.init m.Rows (fun i -> m.[i,*])
+    /// Returns the rows of matrix `m` as a sequence of matrices
+    let inline toRows (m:Matrix<'T>):seq<Matrix<'T>> = Seq.init m.Rows (fun i -> m.[i,*])
     /// Constructs a matrix out of a sequence of column vectors `v`. The column vectors should be of equal length.
     let inline ofCols (v:seq<Vector<'T>>):Matrix<'T> = v |> ofRows |> transpose
-    /// Returns the columns of matrix `m` as a sequence of vectors
-    let inline toCols (m:Matrix<'T>):seq<Vector<'T>> = m |> transpose |> toRows
+    /// Returns the columns of matrix `m` as a sequence of matrices
+    let inline toCols (m:Matrix<'T>):seq<Matrix<'T>> = m |> transpose |> toRows
     /// Returns a matrix where vector `v` is appended as a new row to matrix `m`
     let inline appendRow (v:Vector<'T>) (m:Matrix<'T>):Matrix<'T> =
         if m.Cols <> v.Length then invalidArg "" "The length of the appended row should be the same with the number of the columns in the matrix."

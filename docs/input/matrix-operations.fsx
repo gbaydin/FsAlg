@@ -188,13 +188,13 @@ let el1 = m1.[0, 0]         // Element at 0, 0
 let el2 = Matrix.get m1 1 1 // Element at 1, 1
 let sl1 = m1.[0..1, 1..]    // Slice, between rows 0 and 1, columns 1 and beyond
 let sl2 = m1.[*, 0..1]      // Slice, all rows, between columns 0 and 1
-let sl3 = m1.[0, *]         // Return row 0 as a vector
-let sl4 = Matrix.row 0 m1   // Return row 0 as a vector
-let sl5 = m1.[*, 1]         // Return column 1 as a vector
-let sl6 = Matrix.col 1 m1   // Return column 1 as a vector
-let sl7 = Matrix.toRows m1  // Return rows as a sequence of vectors
+let sl3 = m1.[0, *]         // Return row 0
+let sl4 = Matrix.row 0 m1   // Return row 0
+let sl5 = m1.[*, 1]         // Return column 1
+let sl6 = Matrix.col 1 m1   // Return column 1
+let sl7 = Matrix.toRows m1  // Return rows as a sequence
 let m18 = Matrix.ofRows [vector [1.;2.]; vector [3.;4.]] // Create matrix from row vectors
-let sl8 = Matrix.toCols m1  // Return columns as a sequence of vectors
+let sl8 = Matrix.toCols m1  // Return columns as a sequence
 let m19 = Matrix.ofCols [vector [1.;2.]; vector [3.;4.]] // Create matrix from column vectors
 let m20 = Matrix.ofSeqSeq [[1.; 2.]; [3.; 4.]]  // Convert sequence of sequences to matrix
 let m21 = matrix [[1.; 2.]; [3.; 4.]]        // Same with above, supports lists,
@@ -214,14 +214,16 @@ val sl1 : Matrix<float> = Matrix [[2.0]
                                   [4.0]]
 val sl2 : Matrix<float> = Matrix [[1.0; 2.0]
                                   [3.0; 4.0]]
-val sl3 : Vector<float> = Vector [|1.0; 2.0|]
-val sl4 : Vector<float> = Vector [|1.0; 2.0|]
-val sl5 : Vector<float> = Vector [|2.0; 4.0|]
-val sl6 : Vector<float> = Vector [|2.0; 4.0|]
-val sl7 : seq<Vector<float>>
+val sl3 : Matrix<float> = Matrix [[1.0; 2.0]]
+val sl4 : Matrix<float> = Matrix [[1.0; 2.0]]
+val sl5 : Matrix<float> = Matrix [[2.0]
+                                  [4.0]]
+val sl6 : Matrix<float> = Matrix [[2.0]
+                                  [4.0]]
+val sl7 : seq<Matrix<float>>
 val m18 : Matrix<float> = Matrix [[1.0; 2.0]
                                   [3.0; 4.0]]
-val sl8 : seq<Vector<float>>
+val sl8 : seq<Matrix<float>>
 val m19 : Matrix<float> = Matrix [[1.0; 3.0]
                                   [2.0; 4.0]]
 val m20 : Matrix<float> = Matrix [[1.0; 2.0]
